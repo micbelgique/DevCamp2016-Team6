@@ -1,1 +1,1 @@
-# DevCamp2016-Team6
+# Creative Monkeys

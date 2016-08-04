@@ -1,3 +1,6 @@
 # Creative Monkeys
 
-Julien Fontaine
++ Aurélien Malisart
++ François Stephany
++ ~~Julien Fontaine (Papa)~~
++ Michaël Hoste

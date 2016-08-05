@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20160805101452) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
-    t.string   "uuid"
+    t.string   "device_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

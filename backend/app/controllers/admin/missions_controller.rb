@@ -14,12 +14,14 @@ class Admin::MissionsController < Admin::BaseController
     if @mission.save
       redirect_to admin_missions_path
     else
+      set_flash_now_errors(@mission)
       render 'form'
     end
   end
 
   def edit
     @mission = Mission.find(params[:id])
+    render 'form'
   end
 
   def update
@@ -28,6 +30,7 @@ class Admin::MissionsController < Admin::BaseController
     if @mission.update_attributes(strong_params)
       redirect_to admin_missions_path
     else
+      set_flash_now_errors(@mission)
       render 'form'
     end
   end
@@ -36,5 +39,13 @@ class Admin::MissionsController < Admin::BaseController
     @mission = Mission.find(params[:id])
     @mission.destroy
     redirect_to admin_missions_path
+  end
+
+  private
+
+  def strong_params
+    params.require(:mission).permit(
+      :name, :tagline, :description, :picture, :latitude, :longitude
+    )
   end
 end

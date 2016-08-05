@@ -11,6 +11,9 @@ class Mission extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>
+          { this.props.mission.name }
+        </Text>
       </View>
     );
   }

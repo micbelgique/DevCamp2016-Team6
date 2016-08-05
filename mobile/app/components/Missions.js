@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   InteractionManager,
+  TouchableNativeFeedback,
   StyleSheet,
   Text,
   Image,
@@ -42,6 +43,14 @@ class Missions extends Component {
     return 'http://cliche-backend.phonoid.net/api/missions';
   }
 
+  goToMission(mission) {
+    this.props.navigator.push({
+      controller: 'missions',
+      action:     'show',
+      mission:     mission
+    });
+  }
+
   render() {
     return (
       <ScrollView style={styles.scroll}>
@@ -53,16 +62,20 @@ class Missions extends Component {
   renderMissions() {
     return this.state.missions.map((mission) => {
       return (
-        <View key={mission.id}>
-          <Image style={styles.image} source={{uri: mission.picture}}>
-            <Text style={styles.name}>
-              { mission.name }
-            </Text>
-            <Text style={styles.tagline}>
-              { mission.tagline }
-            </Text>
-          </Image>
-        </View>
+        <TouchableNativeFeedback key={mission.id}
+                                 onPress={this.goToMission.bind(this, mission)}
+                                 background={TouchableNativeFeedback.SelectableBackground()}>
+          <View>
+            <Image style={styles.image} source={{uri: mission.picture}}>
+              <Text style={styles.name}>
+                { mission.name }
+              </Text>
+              <Text style={styles.tagline}>
+                { mission.tagline }
+              </Text>
+            </Image>
+          </View>
+        </TouchableNativeFeedback>
       )
     })
   }

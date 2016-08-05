@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import Missions from './Missions';
+import Mission  from './Mission';
 import NavBar   from './NavBar';
 import Uuid     from '../services/Uuid';
 import styles   from '../styles/NavBarStyles';
@@ -37,12 +38,20 @@ class Routes extends Component {
   }
 
   renderScene(route, navigator) {
-    if(route.controller == 'missions' && route.action == 'index') {
-      console.log(route)
-
-      return (
-        <Missions deviceId={Uuid.generate()}/>
-      )
+    if(route.controller == 'missions') {
+      if(route.action == 'index') {
+        return (
+          <Missions deviceId={Uuid.generate()}
+                    navigator={navigator}/>
+        )
+      }
+      else if(route.action == 'show') {
+        return (
+          <Mission deviceId={Uuid.generate()}
+                   navigator={navigator}
+                   mission={route.mission} />
+        )
+      }
     }
   }
 

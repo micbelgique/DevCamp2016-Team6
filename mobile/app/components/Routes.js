@@ -1,18 +1,57 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
+  Navigator,
   Text,
-  View
+  View,
+  StatusBar,
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 
-import DeviceInfo from 'react-native-device-info';
-import Missions   from './Missions';
+import Missions from './Missions';
+import NavBar   from './NavBar';
+import Uuid     from '../services/Uuid';
+import styles   from '../styles/NavBarStyles';
 
 class Routes extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+    };
+  }
+
   render() {
     return (
-      <Missions deviceId={DeviceInfo.getUniqueID()}/>
+      <View style={{flex: 1}}>
+        <StatusBar barStyle="light-content" backgroundColor="#188c85" translucent={true}/>
+        <Navigator ref="navigator"
+                   style={styles.container}
+                   initialRoute={{ controller: 'missions', action: 'index' }}
+                   renderScene={this.renderScene.bind(this)}
+                   navigationBar={this.renderNavigationBar()}/>
+      </View>
     );
+  }
+
+  renderScene(route, navigator) {
+    if(route.controller == 'missions' && route.action == 'index') {
+      console.log(route)
+
+      return (
+        <Missions deviceId={Uuid.generate()}/>
+      )
+    }
+  }
+
+  renderNavigationBar() {
+    return (
+      <Navigator.NavigationBar navigationStyles={Navigator.NavigationBar.StylesIOS}
+                               style={styles.navBar}
+                               routeMapper={NavBar({})}/>
+    )
   }
 }
 

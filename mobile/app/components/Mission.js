@@ -5,7 +5,7 @@ import {
   View
 } from 'react-native';
 
-const styles = require('../styles/MissionStyles');
+import styles from '../styles/MissionStyles';
 
 class Mission extends Component {
   render() {

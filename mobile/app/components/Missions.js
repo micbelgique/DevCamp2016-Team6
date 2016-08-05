@@ -3,10 +3,14 @@ import {
   InteractionManager,
   StyleSheet,
   Text,
+  Image,
+  ScrollView,
   View
 } from 'react-native';
 
-import styles from '../styles/MissionsStyles';
+import HttpService from '../services/HttpService';
+import styles      from '../styles/MissionsStyles';
+import _           from 'lodash'
 
 class Missions extends Component {
   constructor(props) {
@@ -24,7 +28,14 @@ class Missions extends Component {
   }
 
   reloadMissions() {
+    url = this.missionsUrl()
 
+    new HttpService(url).get({
+      device_id: this.props.deviceId
+    }, data => {
+      console.log (data);
+      this.setState({ missions: data });
+    });
   }
 
   missionsUrl() {
@@ -33,12 +44,27 @@ class Missions extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>
-          { this.missionsUrl() + this.props.deviceId }
-        </Text>
-      </View>
+      <ScrollView style={styles.scroll}>
+        { this.renderMissions() }
+      </ScrollView>
     );
+  }
+
+  renderMissions() {
+    return this.state.missions.map((mission) => {
+      return (
+        <View key={mission.id}>
+          <Text>
+            { mission.name }
+          </Text>
+          <Image source={{uri: mission.picture}}
+                 style={{flex: 1, height: 400}} />
+          <Text>
+            { mission.tagline }
+          </Text>
+        </View>
+      )
+    })
   }
 }
 

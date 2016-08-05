@@ -5,8 +5,12 @@ class HttpService {
     this.url = url;
   }
 
-  get(callback) {
-    return fetch(this.url)
+  get(request, callback) {
+    requestString = this._stringify(request)
+
+    console.log(this.url + '?' + requestString)
+
+    return fetch(this.url + '?' + requestString)
              .then(this._parseJSON)
              .then(data => {
                if(callback) {
@@ -21,6 +25,18 @@ class HttpService {
 
   post(request, callback) {
     return this._postOrPutRequest(request, 'POST', callback);
+  }
+
+  _stringify(request) {
+    var requestString = "";
+
+    for (var key in request) {
+      if (requestString != "")
+        requestString += "&";
+      requestString += key + "=" + encodeURIComponent(request[key]);
+    }
+
+    return requestString;
   }
 
   _parseJSON(response) {

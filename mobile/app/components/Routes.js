@@ -36,8 +36,10 @@ class Routes extends Component {
       }
       else {
         uuid = Uuid.generate();
-        this.setState({ deviceId: uuid });
-        AsyncStorage.setItem('deviceId', uuid);
+
+        AsyncStorage.setItem('deviceId', uuid, () => {
+          this.setState({ deviceId: uuid });
+        });
       }
     }).done();
   }
@@ -74,7 +76,10 @@ class Routes extends Component {
     else if(route.controller == "spots") {
       if(route.action == 'show') {
         return (
-          <SpotCamera />
+          <SpotCamera deviceId={this.state.deviceId}
+                      navigator={navigator}
+                      mission={route.mission}
+                      spot={route.spot} />
         )
       }
     }

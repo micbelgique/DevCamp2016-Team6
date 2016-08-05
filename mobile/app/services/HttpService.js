@@ -24,6 +24,9 @@ class HttpService {
   }
 
   post(request, callback) {
+    console.log(url);
+    console.log(request);
+
     return this._postOrPutRequest(request, 'POST', callback);
   }
 

@@ -48,6 +48,7 @@ class Mission extends Component {
     this.props.navigator.push({
       controller: 'spots',
       action:     'show',
+      mission:    this.props.mission,
       spot:       spot
     });
   }

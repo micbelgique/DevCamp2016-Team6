@@ -7,17 +7,16 @@ module.exports = StyleSheet.create({
   },
   image: {
     flex: 1,
-    height: 300
+    height: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   name: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
     textAlign: 'center',
-    marginTop: -100,
+    color: '#ffffff'
   },
   tagline: {
     textAlign: 'center',
+    color: '#ffffff'
   }
 });

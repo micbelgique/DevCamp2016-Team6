@@ -7,6 +7,6 @@ class UserSpotLink < ApplicationRecord
 
   # CarrierWave
 
-  mount_uploader :logo, PictureUploader
+  mount_uploader :picture, PictureUploader
 
 end

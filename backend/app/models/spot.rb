@@ -8,6 +8,10 @@ class Spot < ApplicationRecord
 
   # CarrierWave
 
-  mount_uploader :logo, PictureUploader
+  mount_uploader :picture, PictureUploader
+
+  # Validation
+
+  validates :name, :presence => { :message => "Le nom est obligatoire." }
 
 end

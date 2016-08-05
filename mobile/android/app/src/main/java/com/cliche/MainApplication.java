@@ -1,4 +1,4 @@
-package com.mobile;
+package com.cliche;
 
 import android.app.Application;
 import android.util.Log;

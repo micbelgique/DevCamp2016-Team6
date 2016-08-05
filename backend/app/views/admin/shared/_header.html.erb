@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container">
+    <div class="row">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="<%= root_path %>">Cliché</a>
+      </div>
+
+      <ul class="nav navbar-nav sections">
+        <% missions_tab_active = params[:controller] == 'admin/missions' %>
+        <% users_tab_active    = params[:controller] == 'admin/users'    %>
+
+        <li<%= ' class="active"'.html_safe if missions_tab_active %>>
+          <a href="<%= admin_missions_path %>">Missions</a>
+        </li>
+
+        <li<%= ' class="active"'.html_safe if users_tab_active %>>
+          <a href="<%= admin_users_path %>">Utilisateurs</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav pull-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            John Doe <i class="fa fa-caret-down"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

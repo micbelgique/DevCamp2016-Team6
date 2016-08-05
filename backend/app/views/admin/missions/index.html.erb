@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @missions.each do |mission| %>
+          <tr>
+            <td><%= mission.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

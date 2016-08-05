@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+
+    <% if @users.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID du périphérique</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.device_id %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

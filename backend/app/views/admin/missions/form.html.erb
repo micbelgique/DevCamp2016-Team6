@@ -35,6 +35,13 @@
 
           <div class="col-md-9">
             <%= f.file_field :picture, :class => 'form-control' %>
+
+            <%= f.hidden_field :picture_cache %>
+
+            <% if @mission.picture.present? %>
+              <br />
+              <img src="<%= @mission.picture.url(:preview) %>" class="thumbnail" />
+            <% end %>
           </div>
         </div>
 

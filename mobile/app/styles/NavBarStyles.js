@@ -1,11 +1,12 @@
 import { StyleSheet, Platform } from 'react-native';
 import _                        from'lodash';
+import GlobalStyles             from './GlobalStyles'
 
 if(Platform.OS == 'android') {
   titleContainerPlatform = {
     position: 'absolute',
     alignItems: 'flex-start',
-    left: 64,
+    left: 28,
   }
 }
 else
@@ -13,7 +14,7 @@ else
 
 module.exports = StyleSheet.create({
   navBar: {
-    height: 64,
+    height: GlobalStyles.headerMargin,
     backgroundColor: '#20B7AF',
     flex: 1
   },
@@ -25,7 +26,7 @@ module.exports = StyleSheet.create({
   title: {
     textAlign: 'left',
     color: 'white',
-    marginTop: 18,
+    marginTop: 14,
     fontSize: 18,
     fontWeight: '500',
   },

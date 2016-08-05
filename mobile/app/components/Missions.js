@@ -54,12 +54,13 @@ class Missions extends Component {
     return this.state.missions.map((mission) => {
       return (
         <View key={mission.id}>
-          <Text>
+          <Image style={styles.image}
+                 source={{uri: mission.picture}}>
+          </Image>
+          <Text style={styles.name}>
             { mission.name }
           </Text>
-          <Image source={{uri: mission.picture}}
-                 style={{flex: 1, height: 400}} />
-          <Text>
+          <Text style={styles.tagline}>
             { mission.tagline }
           </Text>
         </View>

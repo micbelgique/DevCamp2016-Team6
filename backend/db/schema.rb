@@ -12,17 +12,18 @@
 
 ActiveRecord::Schema.define(version: 20160805101452) do
 
-  create_table "missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string   "name"
-    t.string   "description"
+    t.string   "tagline"
+    t.text     "description", limit: 65535
     t.string   "picture"
     t.float    "latitude",    limit: 24
     t.float    "longitude",   limit: 24
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  create_table "spots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "spots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "mission_id"
     t.string   "name"
     t.string   "description"
@@ -34,7 +35,7 @@ ActiveRecord::Schema.define(version: 20160805101452) do
     t.index ["mission_id"], name: "index_spots_on_mission_id", using: :btree
   end
 
-  create_table "user_spot_links", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_spot_links", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "user_id"
     t.integer  "spot_id"
     t.string   "picture"
@@ -44,7 +45,7 @@ ActiveRecord::Schema.define(version: 20160805101452) do
     t.index ["user_id"], name: "index_user_spot_links_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string   "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -2,7 +2,8 @@ class CreateMissions < ActiveRecord::Migration[5.0]
   def change
     create_table :missions do |t|
       t.string :name
-      t.string :description
+      t.string :tagline
+      t.text   :description
       t.string :picture
 
       t.float :latitude

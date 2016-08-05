@@ -3,7 +3,7 @@ import {
   AppRegistry,
 } from 'react-native';
 
-var Routes = require('./app/Routes');
+var Routes = require('./app/components/Routes');
 
 class Cliche extends Component {
   render() {

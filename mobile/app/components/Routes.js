@@ -10,7 +10,6 @@ const styles = require('../styles/RoutesStyles');
 class Routes extends Component {
   render() {
     return (
-      <Main />
       <View style={styles.container}>
         <Text style={styles.welcome}>
           Welcome to React Native!

@@ -11,7 +11,10 @@ import styles from '../styles/NavBarStyles';
 
 var NavBar = props => ({
   LeftButton (route, navigator, index, navState) {
-    if(route.controller == 'missions' && route.action == 'show') {
+    missionsShow = route.controller == 'missions' && route.action == 'show'
+    spotsShow    = route.controller == 'spots'    && route.action == 'show'
+
+    if(missionsShow || spotsShow) {
       leftIconName = Platform.OS == 'android' ? 'arrow-back' : 'keyboard-arrow-left';
 
       return (

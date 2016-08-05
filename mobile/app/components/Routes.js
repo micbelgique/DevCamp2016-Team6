@@ -9,11 +9,12 @@ import {
   AsyncStorage
 } from 'react-native';
 
-import Missions from './Missions';
-import Mission  from './Mission';
-import NavBar   from './NavBar';
-import Uuid     from '../services/Uuid';
-import styles   from '../styles/NavBarStyles';
+import Missions   from './Missions';
+import Mission    from './Mission';
+import SpotCamera from './SpotCamera';
+import NavBar     from './NavBar';
+import Uuid       from '../services/Uuid';
+import styles     from '../styles/NavBarStyles';
 
 class Routes extends Component {
   constructor(props) {
@@ -67,6 +68,13 @@ class Routes extends Component {
           <Mission deviceId={this.state.deviceId}
                    navigator={navigator}
                    mission={route.mission} />
+        )
+      }
+    }
+    else if(route.controller == "spots") {
+      if(route.action == 'show') {
+        return (
+          <SpotCamera />
         )
       }
     }

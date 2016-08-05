@@ -1,6 +1,6 @@
 collection @spots
-attributes :id, :name
+attributes :id, :name, :description
 
 node :picture do |spot|
-  spot.picture.try(:url)
+  spot.picture.try(:url, :preview)
 end

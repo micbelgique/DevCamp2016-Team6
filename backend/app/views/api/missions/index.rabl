@@ -1,6 +1,6 @@
 collection @missions
-attributes :id, :name
+attributes :id, :name, :description
 
 node :picture do |mission|
-  mission.picture.try(:url)
+  mission.picture.try(:url, :preview)
 end

@@ -1,9 +1,14 @@
 <div class="container">
   <div class="row">
+  <%= link_to 'Ajouter une mission', new_admin_mission_path, :class => 'btn btn-xs btn-primary pull-right btn-new' %>
+
     <table class="table">
       <thead>
         <tr>
           <th>Nom</th>
+          <th>Accroche</th>
+          <th>Points</th>
+          <th></th>
         </tr>
       </thead>
 
@@ -11,6 +16,13 @@
         <% @missions.each do |mission| %>
           <tr>
             <td><%= mission.name %></td>
+            <td><%= mission.tagline %></td>
+            <td><%= mission.spots.count %></td>
+
+            <td class="actions">
+              <%= link_to fa('edit'),   edit_admin_mission_path(mission), :class => 'btn btn-xs btn-default' %>
+              <%= link_to fa('remove'), admin_mission_path(mission),      :class => 'btn btn-xs btn-danger', :data => { :confirm => "Supprimer cette mission ?" }, :method => :delete %>
+            </td>
           </tr>
         <% end %>
       </tbody>

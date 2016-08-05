@@ -1,0 +1,32 @@
+#admin-missions-new,
+#admin-missions-create,
+#admin-missions-edit,
+#admin-missions-update {
+  .panel {
+    margin-top: 20px;
+    padding-top: 20px;
+    background-color: white;
+
+    h1 {
+      margin: 0;
+      margin-bottom: 30px;
+      font-size: 25px;
+      text-align: center;
+    }
+  }
+
+  .checkbox {
+    input {
+      margin-left: 0px;
+    }
+  }
+
+  .actions {
+    text-align: right;
+    margin-bottom: 12px;
+
+    .btn {
+      margin-left: 6px;
+    }
+  }
+}

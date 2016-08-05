@@ -29,18 +29,12 @@ class SpotCamera extends Component {
 
   takePicture() {
     this.refs.camera.capture()
-      .then((data) => {
-        Alert.alert(data.path);
-
-        var photo = {
-          uri:   data.path,
-          type: 'image/jpeg',
-          name: 'photo.jpg',
-        };
+      .then((picture) => {
+        //Alert.alert(picture.path);
 
         url = 'http://cliche-backend.phonoid.net/api/missions/' + this.props.mission.id + '/spots/' + this.props.spot.id + '/user_spot_links'
 
-        new HttpService(url).post({ user_spot_link: { picture: photo }}, (data) => {
+        new HttpService(url).post({ user_spot_link: { picture: picture.data }}, (data) => {
           console.log(data);
         })
       })
@@ -55,7 +49,8 @@ class SpotCamera extends Component {
         <Camera ref="camera"
                 style={styles.preview}
                 aspect={Camera.constants.Aspect.fill}
-                orientation={Camera.constants.Orientation.auto}>
+                orientation={Camera.constants.Orientation.auto}
+                captureTarget={Camera.constants.CaptureTarget.memory}>
           <Text style={styles.capture}
                 onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
         </Camera>

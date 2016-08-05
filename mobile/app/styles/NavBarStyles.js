@@ -6,7 +6,6 @@ if(Platform.OS == 'android') {
   titleContainerPlatform = {
     position: 'absolute',
     alignItems: 'flex-start',
-    left: 28,
   }
 }
 else
@@ -21,7 +20,6 @@ module.exports = StyleSheet.create({
   titleContainer: _.merge({
     flex: 1,
     paddingBottom: 15,
-    //borderWidth: 1,
   }, titleContainerPlatform),
   title: {
     textAlign: 'left',
@@ -32,7 +30,7 @@ module.exports = StyleSheet.create({
   },
   leftIconContainer: {
     marginLeft: Platform.OS == 'android' ? 8 : 2,
-    paddingTop: 18.5,
+    paddingTop: 15,
     paddingLeft: 8,
     paddingRight: 8,
     paddingBottom: 15.5

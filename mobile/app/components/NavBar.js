@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  StyleSheet,
   Text,
   View,
   TouchableOpacity,
@@ -47,9 +48,33 @@ var NavBar = props => ({
         title = route.mission.name
       }
     }
+    else if(route.controller == 'spots') {
+      if(route.action == 'show') {
+        title = route.spot.name
+      }
+    }
+
+    // center
+    if(Platform.OS == 'ios') {
+      left = 0
+    }
+    // left without space
+    else if(Platform.OS == 'android' && route.controller == 'missions' && route.action == 'index') {
+      left = 28
+    }
+    // left with space
+    else {
+      left = 50
+    }
+
+    titleContainerStyles = StyleSheet.create({
+      titleContainer: {
+        left: left
+      }
+    })
 
     return (
-      <View style={styles.titleContainer}>
+      <View style={[ styles.titleContainer, titleContainerStyles.titleContainer ]}>
         <Text style={styles.title}>
           { title }
         </Text>

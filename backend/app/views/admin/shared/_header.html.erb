@@ -6,7 +6,7 @@
       </div>
 
       <ul class="nav navbar-nav sections">
-        <% missions_tab_active = params[:controller] == 'admin/missions' %>
+        <% missions_tab_active = params[:controller] == 'admin/missions' || params[:controller] == 'admin/spots' %>
         <% users_tab_active    = params[:controller] == 'admin/users'    %>
 
         <li<%= ' class="active"'.html_safe if missions_tab_active %>>

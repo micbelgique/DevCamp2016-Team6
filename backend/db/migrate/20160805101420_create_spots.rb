@@ -4,7 +4,7 @@ class CreateSpots < ActiveRecord::Migration[5.0]
       t.references :mission, foreign_key: true
 
       t.string :name
-      t.string :description
+      t.text   :description
       t.string :picture
 
       t.float :latitude

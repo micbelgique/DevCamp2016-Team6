@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :missions do
-      resources :spots
+      resources :spots do
+        resources :user_spot_links
+      end
     end
   end
 

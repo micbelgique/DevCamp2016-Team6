@@ -6,4 +6,8 @@ class PictureUploader < BasePublicUploader
   version :preview do
     process :resize_to_fit => [400, 200]
   end
+
+  version :tiny do
+    process :resize_to_fit => [100, 50]
+  end
 end

@@ -1,24 +1,16 @@
 <div class="container">
   <div class="row">
     <div class="panel col-md-6 col-md-offset-3">
-      <h1><%= params[:action].in?(['new', 'create']) ? "Ajouter une mission" : "Modifier une mission" %></h1>
+      <h1><%= params[:action].in?(['new', 'create']) ? "Ajouter un point" : "Modifier un point" %></h1>
 
       <%= render 'shared/flash' %>
 
-      <%= form_for([:admin, @mission], :html => { :class => 'form-horizontal' }) do |f| %>
+      <%= form_for([:admin, @mission, @spot], :html => { :class => 'form-horizontal' }) do |f| %>
         <div class="form-group">
           <%= f.label :name, 'Nom', :class => 'control-label col-md-3' %>
 
           <div class="col-md-9">
             <%= f.text_field :name, :class => 'form-control' %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :tagline, 'Accroche', :class => 'control-label col-md-3' %>
-
-          <div class="col-md-9">
-            <%= f.text_field :tagline, :class => 'form-control' %>
           </div>
         </div>
 
@@ -38,9 +30,9 @@
 
             <%= f.hidden_field :picture_cache %>
 
-            <% if @mission.picture.present? %>
+            <% if @spot.picture.present? %>
               <br />
-              <img src="<%= @mission.picture.url(:preview) %>" class="thumbnail" />
+              <img src="<%= @spot.picture.url(:preview) %>" class="thumbnail" />
             <% end %>
           </div>
         </div>
@@ -62,7 +54,7 @@
         </div>
 
         <div class="actions">
-          <%= link_to 'Annuler', admin_missions_path, :class => 'btn btn-sm btn-default' %>
+          <%= link_to 'Annuler', admin_mission_spots_path(@mission), :class => 'btn btn-sm btn-default' %>
           <%= f.submit 'Enregistrer', :class => 'btn btn-sm btn-primary' %>
         </div>
       <% end %>

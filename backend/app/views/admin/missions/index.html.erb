@@ -1,5 +1,9 @@
 <div class="container">
   <div class="row">
+    <ol class="breadcrumb">
+      <li><%= link_to 'Missions', admin_missions_path %></li>
+    </ol>
+
     <%= link_to 'Ajouter une mission', new_admin_mission_path, :class => 'btn btn-xs btn-primary pull-right btn-new' %>
 
     <table class="table">
@@ -7,7 +11,8 @@
         <tr>
           <th>Nom</th>
           <th>Accroche</th>
-          <th>Points</th>
+          <th>Photo</th>
+          <th class="number">Points</th>
           <th></th>
         </tr>
       </thead>
@@ -15,9 +20,10 @@
       <tbody>
         <% @missions.each do |mission| %>
           <tr>
-            <td><%= mission.name %></td>
+            <td><%= link_to mission.name, admin_mission_spots_path(mission) %></td>
             <td><%= mission.tagline %></td>
-            <td><%= mission.spots.count %></td>
+            <td><img src="<%= mission.picture.url(:tiny) %>" /></td>
+            <td class="number"><%= link_to mission.spots.count, admin_mission_spots_path(mission) %></td>
 
             <td class="actions">
               <%= link_to fa('edit'),   edit_admin_mission_path(mission), :class => 'btn btn-xs btn-default' %>

@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><%= link_to 'Missions', admin_missions_path %></li>
+      <li><%= @mission.name %></li>
+      <li class="active"><%= link_to 'Points', admin_mission_spots_path(@mission) %></li>
+    </ol>
+
+    <%= link_to 'Ajouter un point', new_admin_mission_spot_path(@mission), :class => 'btn btn-xs btn-primary pull-right btn-new' %>
+
+    <% if @spots.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Photo</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @spots.each do |spot| %>
+            <tr>
+              <td><%= spot.name %></td>
+              <td><img src="<%= spot.picture.url(:tiny) %>" /></td>
+
+              <td class="actions">
+                <%= link_to fa('edit'),   edit_admin_mission_spot_path(@mission, spot), :class => 'btn btn-xs btn-default' %>
+                <%= link_to fa('remove'), admin_mission_spot_path(@mission, spot),      :class => 'btn btn-xs btn-danger', :data => { :confirm => "Supprimer cette mission ?" }, :method => :delete %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

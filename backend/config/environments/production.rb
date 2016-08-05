@@ -1,4 +1,7 @@
 Rails.application.configure do
+
+  APP_HOSTNAME = "http://cliche-backend.phonoid.net"
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -28,7 +31,7 @@ Rails.application.configure do
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = 'http://cliche-backend.phonoid.net'
+  config.action_controller.asset_host = APP_HOSTNAME
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache

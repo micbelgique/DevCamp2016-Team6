@@ -1,6 +1,6 @@
 package cliches.com.cliche.missions;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import cliches.com.cliche.R;
 
 public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.MissionViewHolder> {
 
+    Context mContext;
     MissionsPresenter mPresenter;
 
-    public MissionsAdapter(MissionsPresenter presenter) {
+    public MissionsAdapter(Context context,MissionsPresenter presenter) {
+        mContext = context;
         mPresenter = presenter;
     }
 
@@ -24,39 +28,50 @@ public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.Missio
                 .from(viewGroup.getContext())
                 .inflate(R.layout.line_item_mission, viewGroup, false);
 
-        return new MissionViewHolder(itemView);
+        return new MissionViewHolder(mPresenter, itemView);
     }
 
     @Override
     public void onBindViewHolder(MissionViewHolder holder, int position) {
-        Mission currentMistion = mPresenter.getMissions(position);
+        Mission currentMistion = mPresenter.getMission(position);
+        holder.name.setText(currentMistion.name);
+        holder.tagLine.setText(currentMistion.tagline);
 
-
+        Glide.with(mContext)
+                .load(currentMistion.pictureURL)
+                .fitCenter()
+                .into(holder.image);
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mPresenter.missionCount();
     }
 
     // View Holder
 
-    static class MissionViewHolder extends RecyclerView.ViewHolder implements DialogInterface.OnClickListener {
+    static class MissionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private final MissionsPresenter mPresenter;
+
         private final TextView name;
         private final TextView tagLine;
         private final ImageView image;
 
-        public MissionViewHolder(View itemView) {
+        public MissionViewHolder(MissionsPresenter presenter, View itemView) {
             super(itemView);
+            mPresenter = presenter;
             name = (TextView) itemView.findViewById(R.id.name);
             tagLine = (TextView) itemView.findViewById(R.id.tagline);
             image = (ImageView) itemView.findViewById(R.id.image);
+
+            itemView.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-
+        public void onClick(View view) {
+            mPresenter.openMission(getAdapterPosition());
         }
     }
 }

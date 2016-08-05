@@ -1,6 +1,8 @@
 package cliches.com.cliche.missions;
 
 
+import java.util.List;
+
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -36,7 +38,7 @@ public class WebService {
 
     public interface ClicheInterface {
         @GET("api/missions")
-        Observable<MissionHolder> getMissions();
+        Observable<List<Mission>> getMissions();
     }
 
     public ClicheInterface getApi() {

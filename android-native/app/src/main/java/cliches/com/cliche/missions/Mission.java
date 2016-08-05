@@ -1,11 +1,17 @@
 package cliches.com.cliche.missions;
 
-/**
- * Created by fstephany on 06/08/16.
- */
-public class Mission {
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class Mission implements Serializable{
 
     public String name;
     public String tagline;
-    public String 
+
+    @SerializedName("id")
+    public int serverId;
+
+    @SerializedName("picture")
+    public String pictureURL;
 }

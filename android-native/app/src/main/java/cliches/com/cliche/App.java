@@ -2,7 +2,6 @@ package cliches.com.cliche;
 
 
 import android.app.Application;
-import android.databinding.ObservableField;
 
 import cliches.com.cliche.missions.AuthInterceptor;
 import cliches.com.cliche.missions.MissionHolder;
@@ -24,6 +23,10 @@ public class App extends Application {
         return sInstance;
     }
 
+    public WebService.ClicheInterface getApi() {
+        return mApi;
+    }
+
     public Preferences getPrefs() {
         return mPrefs;
     }
@@ -34,19 +37,6 @@ public class App extends Application {
         sInstance = this;
         initializePrefs();
         initializeWebService();
-
-        Observable<MissionHolder> observable = mApi.getMissions();
-
-        observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        missionHolder -> {
-                            Timber.d("missionsHolder: %s", missionHolder.toString());
-                        },
-                        throwable -> { Timber.e(throwable, "Error while fetching missions"); },
-                        () -> {}
-                );
     }
 
     private void initializePrefs() {

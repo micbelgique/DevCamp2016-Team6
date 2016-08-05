@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(version: 20160805101452) do
   create_table "spots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.integer  "mission_id"
     t.string   "name"
-    t.string   "description"
+    t.text     "description", limit: 65535
     t.string   "picture"
     t.float    "latitude",    limit: 24
     t.float    "longitude",   limit: 24
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["mission_id"], name: "index_spots_on_mission_id", using: :btree
   end
 

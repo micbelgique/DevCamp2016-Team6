@@ -6,8 +6,8 @@
         <thead>
           <tr>
             <th>ID du périphérique</th>
-            <th>Missions</th>
-            <th>Photos</th>
+            <th class="number">Missions</th>
+            <th class="number">Photos</th>
             <th></th>
           </tr>
         </thead>
@@ -16,8 +16,8 @@
           <% @users.each do |user| %>
             <tr>
               <td><%= user.device_id %></td>
-              <td><%= user.missions.count %></td>
-              <td><%= user.user_spot_links.count %></td>
+              <td class="number"><%= user.missions.count %></td>
+              <td class="number"><%= user.user_spot_links.count %></td>
 
               <td class="actions">
                 <%= link_to fa('remove'), admin_user_path(user), :class => 'btn btn-xs btn-danger', :data => { :confirm => "Supprimer cet utilisateur et ses données ?" }, :method => :delete %>

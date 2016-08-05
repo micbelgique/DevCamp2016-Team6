@@ -8,7 +8,7 @@ class HttpService {
   get(request, callback) {
     requestString = this._stringify(request)
 
-    console.log(this.url + '?' + requestString)
+    console.log(this.url + '?' + requestString);
 
     return fetch(this.url + '?' + requestString)
              .then(this._parseJSON)

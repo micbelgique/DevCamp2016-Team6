@@ -6,16 +6,23 @@ import {
   Platform,
 } from 'react-native';
 
-//import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon   from 'react-native-vector-icons/MaterialIcons';
 import styles from '../styles/NavBarStyles';
 
 var NavBar = props => ({
   LeftButton (route, navigator, index, navState) {
-    return (
-      <Text>
+    if(route.controller == 'missions' && route.action == 'show') {
+      leftIconName = Platform.OS == 'android' ? 'arrow-back' : 'keyboard-arrow-left';
 
-      </Text>
-    );
+      return (
+        <TouchableOpacity onPress={navigator.pop}>
+          <View style={styles.leftIconContainer}>
+            <Icon name={leftIconName}
+                  style={styles.leftIcon} />
+          </View>
+        </TouchableOpacity>
+      )
+    }
   },
 
   RightButton (route, navigator, index, navState) {
@@ -32,6 +39,9 @@ var NavBar = props => ({
     if(route.controller == 'missions') {
       if(route.action == 'index') {
         title = 'Cliché'
+      }
+      else if(route.action == 'show') {
+        title = route.mission.name
       }
     }
 

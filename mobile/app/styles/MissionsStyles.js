@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import GlobalStyles   from './GlobalStyles'
+import GlobalStyles   from './GlobalStyles';
 
 module.exports = StyleSheet.create({
   scroll: {

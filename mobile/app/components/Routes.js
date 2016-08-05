@@ -20,8 +20,25 @@ class Routes extends Component {
     super(props);
 
     this.state = {
-
+      deviceId: ''
     };
+  }
+
+  componentWillMount() {
+    this.loginIfPreviousSession()
+  }
+
+  loginIfPreviousSession() {
+    AsyncStorage.getItem("deviceId").then((value) => {
+      if(value != '' && value != null) {
+        this.setState({deviceId: value});
+      }
+      else {
+        uuid = Uuid.generate();
+        this.setState({ deviceId: uuid });
+        AsyncStorage.setItem('deviceId', uuid);
+      }
+    }).done();
   }
 
   render() {
@@ -41,13 +58,13 @@ class Routes extends Component {
     if(route.controller == 'missions') {
       if(route.action == 'index') {
         return (
-          <Missions deviceId={Uuid.generate()}
+          <Missions deviceId={this.state.deviceId}
                     navigator={navigator}/>
         )
       }
       else if(route.action == 'show') {
         return (
-          <Mission deviceId={Uuid.generate()}
+          <Mission deviceId={this.state.deviceId}
                    navigator={navigator}
                    mission={route.mission} />
         )

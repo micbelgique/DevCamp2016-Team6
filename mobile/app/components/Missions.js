@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import {
   InteractionManager,
   TouchableNativeFeedback,
+  TouchableOpacity,
   StyleSheet,
   Text,
   Image,
   ScrollView,
-  View
+  View,
+  Platform,
+  AsyncStorage
 } from 'react-native';
 
 import HttpService from '../services/HttpService';
 import styles      from '../styles/MissionsStyles';
-import _           from 'lodash'
 
 class Missions extends Component {
   constructor(props) {
@@ -28,19 +30,19 @@ class Missions extends Component {
     });
   }
 
+  missionsUrl() {
+    return 'http://cliche-backend.phonoid.net/api/missions';
+  }
+
   reloadMissions() {
     url = this.missionsUrl()
 
     new HttpService(url).get({
       device_id: this.props.deviceId
     }, data => {
-      console.log (data);
+      console.log(data);
       this.setState({ missions: data });
     });
-  }
-
-  missionsUrl() {
-    return 'http://cliche-backend.phonoid.net/api/missions';
   }
 
   goToMission(mission) {
@@ -60,24 +62,46 @@ class Missions extends Component {
   }
 
   renderMissions() {
-    return this.state.missions.map((mission) => {
-      return (
-        <TouchableNativeFeedback key={mission.id}
-                                 onPress={this.goToMission.bind(this, mission)}
-                                 background={TouchableNativeFeedback.SelectableBackground()}>
-          <View>
-            <Image style={styles.image} source={{uri: mission.picture}}>
-              <Text style={styles.name}>
-                { mission.name }
-              </Text>
-              <Text style={styles.tagline}>
-                { mission.tagline }
-              </Text>
-            </Image>
-          </View>
-        </TouchableNativeFeedback>
-      )
+    return this.state.missions.map((project) => {
+      if(Platform.OS === 'ios')
+        return this.renderMissionForIOS(project);
+      else
+        return this.renderMissionForAndroid(project);
     })
+  }
+
+  renderMissionForAndroid(mission) {
+    return (
+      <TouchableNativeFeedback key={mission.id}
+                               onPress={this.goToMission.bind(this, mission)}
+                               background={TouchableNativeFeedback.SelectableBackground()}>
+        { this.renderMissionInside(mission) }
+      </TouchableNativeFeedback>
+    );
+  }
+
+  renderMissionForIOS(mission) {
+    return (
+      <TouchableOpacity key={mission.id}
+                        onPress={this.goToMission.bind(this, mission)}>
+        { this.renderMissionInside(mission) }
+      </TouchableOpacity>
+    );
+  }
+
+  renderMissionInside(mission) {
+    return (
+      <View>
+        <Image style={styles.image} source={{uri: mission.picture}}>
+          <Text style={styles.name}>
+            { mission.name }
+          </Text>
+          <Text style={styles.tagline}>
+            { mission.tagline }
+          </Text>
+        </Image>
+      </View>
+    );
   }
 }
 

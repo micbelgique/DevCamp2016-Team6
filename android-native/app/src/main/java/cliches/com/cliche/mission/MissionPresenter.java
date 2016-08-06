@@ -1,6 +1,7 @@
 package cliches.com.cliche.mission;
 
 
+import android.databinding.ObservableField;
 import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
@@ -23,6 +24,9 @@ public class MissionPresenter {
     private Subscription spotsSubscription;
     private List<Spot> mSpots;
 
+    public ObservableField<String> imageURL = new ObservableField<>("");
+    public ObservableField<String> descriptionText = new ObservableField<>("");
+
     public interface ViewActions {
         void notifyNewData();
         void open(Spot spot);
@@ -44,8 +48,12 @@ public class MissionPresenter {
 
     public void openSpot(int position) {
         Spot tappedSpot = mSpots.get(position);
-
         mViewAction.open(tappedSpot);
+    }
+
+    public void refreshDisplay() {
+        imageURL.set(mCurrentMission.pictureURL);
+        descriptionText.set(mCurrentMission.description);
     }
 
     public void refreshSpots() {
@@ -61,7 +69,9 @@ public class MissionPresenter {
                         throwable -> {
                             Timber.e(throwable, "Error while fetching Spots");
                         },
-                        () -> { mViewAction.notifyNewData(); }
+                        () -> {
+                            refreshDisplay();
+                            mViewAction.notifyNewData(); }
                 );
     }
 }

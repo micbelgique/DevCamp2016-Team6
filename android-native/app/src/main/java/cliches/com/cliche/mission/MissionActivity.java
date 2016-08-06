@@ -43,8 +43,11 @@ public class MissionActivity extends AppCompatActivity implements MissionPresent
 
         setupToolbar();
         setupRecyclerView();
-        setTitle(mission.name);
 
+        getSupportActionBar().setTitle(mission.name);
+        mViewBinding.setPresenter(mPresenter);
+
+        mPresenter.refreshDisplay();
         mPresenter.refreshSpots();
     }
 

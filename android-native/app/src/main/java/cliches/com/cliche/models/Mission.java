@@ -8,6 +8,7 @@ public class Mission implements Serializable{
 
     public String name;
     public String tagline;
+    public String description;
 
     @SerializedName("id")
     public int serverId;

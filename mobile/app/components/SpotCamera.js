@@ -103,8 +103,10 @@ class SpotCamera extends Component {
           <Camera ref="camera"
                   style={styles.preview}
                   aspect={Camera.constants.Aspect.fill}
-                  orientation={Camera.constants.Orientation.auto}
-                  captureTarget={Camera.constants.CaptureTarget.memory}>
+                  captureAudio={false}
+                  orientation={Camera.constants.Orientation.portrait}
+                  captureTarget={Camera.constants.CaptureTarget.memory}
+                  captureQuality={Camera.constants.CaptureQuality.low}>
             {text}
           </Camera>
         </View>
@@ -119,7 +121,7 @@ class SpotCamera extends Component {
   renderTakePictureButton() {
     return (
       <Text style={styles.capture}
-            onPress={this.takePicture.bind(this)}>Photo !</Text>
+            onPress={this.takePicture.bind(this)}>Capturer</Text>
     )
   }
 

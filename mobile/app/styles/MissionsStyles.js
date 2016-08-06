@@ -13,10 +13,23 @@ module.exports = StyleSheet.create({
   },
   name: {
     textAlign: 'center',
-    color: '#ffffff'
+    color: '#ffffff',
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 10,
+    backgroundColor: 'red',
+    paddingLeft: 6,
+    paddingRight: 6,
+    opacity: 0.8
   },
   tagline: {
     textAlign: 'center',
-    color: '#ffffff'
+    color: '#eeeeee',
+    fontWeight: '700',
+    fontSize: 14,
+    backgroundColor: '#888888',
+    padding: 4,
+    paddingLeft: 8,
+    paddingRight: 8,
   }
 });

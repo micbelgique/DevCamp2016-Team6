@@ -156,12 +156,20 @@ class Mission extends Component {
           <Text style={styles.name}>
             { spot.name }
           </Text>
-          <Text style={styles.name}>
-            { this.distance(spot) }
-          </Text>
+          { this.renderDistance(spot) }
         </Image>
       </View>
     );
+  }
+
+  renderDistance(spot) {
+    if(this.state.position) {
+      return (
+        <Text style={styles.distance}>
+          { this.distance(spot) }
+        </Text>
+      );
+    }
   }
 }
 

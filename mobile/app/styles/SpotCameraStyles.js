@@ -24,6 +24,7 @@ module.exports = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
+    //height: Dimensions.get('window').height / 2,
   },
 
   capture: {

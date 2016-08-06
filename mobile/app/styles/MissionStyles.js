@@ -24,9 +24,34 @@ module.exports = StyleSheet.create({
     width: vw(50),
     height: 250,
     //flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingBottom: 14
+    //flex: 1,
     //height: 300,
     //width: vw(50),
     //alignItems: 'center',
     //justifyContent: 'center',
   },
+  name: {
+    textAlign: 'center',
+    color: '#ffffff',
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 6,
+    backgroundColor: 'red',
+    paddingLeft: 4,
+    paddingRight: 4,
+    opacity: 0.8
+  },
+  distance: {
+    textAlign: 'center',
+    color: '#eeeeee',
+    fontWeight: '700',
+    fontSize: 10,
+    backgroundColor: '#888888',
+    padding: 4,
+    paddingLeft: 8,
+    paddingRight: 8,
+  }
 });

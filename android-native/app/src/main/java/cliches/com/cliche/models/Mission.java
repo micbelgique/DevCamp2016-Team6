@@ -1,4 +1,4 @@
-package cliches.com.cliche.missions;
+package cliches.com.cliche.models;
 
 import com.google.gson.annotations.SerializedName;
 

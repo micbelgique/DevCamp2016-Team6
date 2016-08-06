@@ -1,15 +1,22 @@
-package cliches.com.cliche.missions;
+package cliches.com.cliche.utils;
 
 
 import java.util.List;
 
+import cliches.com.cliche.models.Mission;
+import cliches.com.cliche.models.Spot;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 
 public class WebService {
@@ -36,15 +43,22 @@ public class WebService {
         mApi = retrofit.create(ClicheInterface.class);
     }
 
+    public ClicheInterface getApi() {
+        return mApi;
+    }
+
     public interface ClicheInterface {
         @GET("api/missions")
         Observable<List<Mission>> getMissions();
 
-        @GET("api/missions")
-        Observable<List<Mission>> getMissions();
-    }
+        @GET("api/missions/{missionId}/spots")
+        Observable<List<Spot>> getSpots(@Path("missionId") int missionId);
 
-    public ClicheInterface getApi() {
-        return mApi;
+        @FormUrlEncoded
+        @POST("api/missions/{missionId}/spots/{spot_id}/user_spot_links")
+        Observable<ResponseBody> sendPicture(
+                @Path("missionId") int missionId,
+                @Path("spot_id") int spotId,
+                @Field("[user_spot_link][picture]") String request);
     }
 }

@@ -1,4 +1,4 @@
-package cliches.com.cliche.missions;
+package cliches.com.cliche.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,15 +1,9 @@
-package cliches.com.cliche;
+package cliches.com.cliche.utils;
 
 
 import android.app.Application;
 
-import cliches.com.cliche.missions.AuthInterceptor;
-import cliches.com.cliche.missions.MissionHolder;
-import cliches.com.cliche.missions.Preferences;
-import cliches.com.cliche.missions.WebService;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import timber.log.BuildConfig;
 import timber.log.Timber;
 
 public class App extends Application {
@@ -35,8 +29,15 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+        initializeTimber();
         initializePrefs();
         initializeWebService();
+    }
+
+    private void initializeTimber() {
+        if(BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 
     private void initializePrefs() {

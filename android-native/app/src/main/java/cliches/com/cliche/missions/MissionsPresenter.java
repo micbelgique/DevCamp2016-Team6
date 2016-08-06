@@ -4,7 +4,8 @@ package cliches.com.cliche.missions;
 import java.util.ArrayList;
 import java.util.List;
 
-import cliches.com.cliche.App;
+import cliches.com.cliche.models.Mission;
+import cliches.com.cliche.utils.App;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -30,7 +31,7 @@ public class MissionsPresenter {
     }
 
     public interface ViewActions {
-        void refreshData();
+        void notifyNewData();
         void open(Mission tappedMission);
     }
 
@@ -50,7 +51,7 @@ public class MissionsPresenter {
                         },
                         throwable -> { Timber.e(throwable, "Error while fetching missions"); },
                         () -> {
-                            mViewActions.refreshData();
+                            mViewActions.notifyNewData();
                         }
                 );
     }

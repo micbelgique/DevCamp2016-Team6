@@ -5,11 +5,11 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.Toolbar;
 
-import cliches.com.cliche.MissionActivity;
+import cliches.com.cliche.mission.MissionActivity;
 import cliches.com.cliche.R;
 import cliches.com.cliche.databinding.ActivityMainBinding;
+import cliches.com.cliche.models.Mission;
 
 public class MainActivity extends AppCompatActivity implements MissionsPresenter.ViewActions {
 
@@ -26,11 +26,7 @@ public class MainActivity extends AppCompatActivity implements MissionsPresenter
 
         setupToolbar();
         setupRecyclerView();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
         mPresenter.refreshMissions();
     }
 
@@ -46,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements MissionsPresenter
     // View Actions
 
     @Override
-    public void refreshData() {
+    public void notifyNewData() {
         mMissionAdapter.notifyDataSetChanged();
     }
 

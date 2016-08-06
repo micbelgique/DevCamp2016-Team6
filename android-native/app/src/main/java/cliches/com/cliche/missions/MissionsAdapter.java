@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import cliches.com.cliche.R;
+import cliches.com.cliche.models.Mission;
 
 public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.MissionViewHolder> {
 

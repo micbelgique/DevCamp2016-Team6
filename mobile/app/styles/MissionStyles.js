@@ -11,7 +11,9 @@ function vh(percentageHeight) {
 
 module.exports = StyleSheet.create({
   scroll: {
-    marginTop: GlobalStyles.headerMargin
+    flex: 1,
+    marginTop: GlobalStyles.headerMargin,
+    backgroundColor: 'white'
   },
   imagesContainer: {
     flex: 1,

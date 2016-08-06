@@ -31,5 +31,19 @@ module.exports = StyleSheet.create({
     padding: 4,
     paddingLeft: 8,
     paddingRight: 8,
+  },
+  stars: {
+    position: 'absolute',
+    bottom: 6,
+    right: 6,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  star: {
+    fontSize: 22,
+    padding: 0,
+    color: 'whitesmoke',
+    opacity: 0.9
   }
 });

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
   InteractionManager,
-  TouchableNativeFeedback,
-  TouchableOpacity,
+  TouchableHighlight,
   StyleSheet,
   Text,
   Image,
@@ -12,6 +11,7 @@ import {
   AsyncStorage
 } from 'react-native';
 
+import Icon        from 'react-native-vector-icons/FontAwesome';
 import HttpService from '../services/HttpService';
 import styles      from '../styles/MissionsStyles';
 
@@ -49,7 +49,8 @@ class Missions extends Component {
     this.props.navigator.push({
       controller: 'missions',
       action:     'show',
-      mission:     mission
+      mission:     mission,
+      onPop:       this.reloadMissions.bind(this)
     });
   }
 
@@ -62,31 +63,14 @@ class Missions extends Component {
   }
 
   renderMissions() {
-    return this.state.missions.map((project) => {
-      if(Platform.OS === 'ios')
-        return this.renderMissionForIOS(project);
-      else
-        return this.renderMissionForAndroid(project);
+    return this.state.missions.map((mission) => {
+      return (
+        <TouchableHighlight key={mission.id}
+                            onPress={this.goToMission.bind(this, mission)}>
+          { this.renderMissionInside(mission) }
+        </TouchableHighlight>
+      );
     })
-  }
-
-  renderMissionForAndroid(mission) {
-    return (
-      <TouchableNativeFeedback key={mission.id}
-                               onPress={this.goToMission.bind(this, mission)}
-                               background={TouchableNativeFeedback.SelectableBackground()}>
-        { this.renderMissionInside(mission) }
-      </TouchableNativeFeedback>
-    );
-  }
-
-  renderMissionForIOS(mission) {
-    return (
-      <TouchableOpacity key={mission.id}
-                        onPress={this.goToMission.bind(this, mission)}>
-        { this.renderMissionInside(mission) }
-      </TouchableOpacity>
-    );
   }
 
   renderMissionInside(mission) {
@@ -100,9 +84,41 @@ class Missions extends Component {
           <Text style={styles.tagline}>
             { mission.tagline }
           </Text>
+
+          { this.renderStars(mission) }
         </Image>
       </View>
     );
+  }
+
+  renderStars(mission) {
+    ratio = 0
+
+    if(mission.spotsCount > 0) {
+      ratio = parseFloat(mission.ownSpotsCount) / parseFloat(mission.spotsCount)
+      ratio = ratio * 100.0 / 20.0
+    }
+
+    return (
+      <View style={styles.stars}>
+        { this.renderStar(ratio, 1.0) }
+        { this.renderStar(ratio, 2.0) }
+        { this.renderStar(ratio, 3.0) }
+        { this.renderStar(ratio, 4.0) }
+        { this.renderStar(ratio, 5.0) }
+      </View>
+    )
+  }
+
+  renderStar(ratio, index) {
+    if(ratio >= index - 0.5 && ratio < index)
+      iconName = 'star-half-o'
+    else if(ratio >= index)
+      iconName = 'star'
+    else
+      iconName = 'star-o'
+
+    return <Icon name={iconName} style={styles.star} />;
   }
 }
 

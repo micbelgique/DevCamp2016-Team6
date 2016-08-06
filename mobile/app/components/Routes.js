@@ -71,7 +71,8 @@ class Routes extends Component {
           return (
             <Mission deviceId={this.state.deviceId}
                      navigator={navigator}
-                     mission={route.mission} />
+                     mission={route.mission}
+                     onPop={route.onPop} />
           )
         }
       }

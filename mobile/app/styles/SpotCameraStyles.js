@@ -4,7 +4,8 @@ import GlobalStyles               from './GlobalStyles';
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: GlobalStyles.headerMargin
+    marginTop: GlobalStyles.headerMargin,
+    backgroundColor: 'white'
   },
 
   example: {

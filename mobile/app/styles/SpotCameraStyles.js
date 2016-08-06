@@ -10,7 +10,8 @@ module.exports = StyleSheet.create({
     flex: 0.5
   },
   exampleImage: {
-    height: 400
+    height: Dimensions.get('window').height/2,
+    width:  Dimensions.get('window').width
   },
   camera: {
     flex: 0.5
@@ -19,8 +20,6 @@ module.exports = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    height: Dimensions.get('window').height,
-    width:  Dimensions.get('window').width
   },
   capture: {
     flex: 0,

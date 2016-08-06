@@ -39,6 +39,9 @@ public class WebService {
     public interface ClicheInterface {
         @GET("api/missions")
         Observable<List<Mission>> getMissions();
+
+        @GET("api/missions")
+        Observable<List<Mission>> getMissions();
     }
 
     public ClicheInterface getApi() {

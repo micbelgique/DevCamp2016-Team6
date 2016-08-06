@@ -33,12 +33,12 @@ public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.Missio
 
     @Override
     public void onBindViewHolder(MissionViewHolder holder, int position) {
-        Mission currentMistion = mPresenter.getMission(position);
-        holder.name.setText(currentMistion.name);
-        holder.tagLine.setText(currentMistion.tagline);
+        Mission currentMission = mPresenter.getMission(position);
+        holder.name.setText(currentMission.name);
+        holder.tagLine.setText(currentMission.tagline);
 
         Glide.with(mContext)
-                .load(currentMistion.pictureURL)
+                .load(currentMission.pictureURL)
                 .fitCenter()
                 .into(holder.image);
     }

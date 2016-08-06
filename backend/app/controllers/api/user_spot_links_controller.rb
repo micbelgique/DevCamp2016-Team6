@@ -17,7 +17,7 @@ class Api::UserSpotLinksController < Api::BaseController
       @user_spot_link.picture = File.new(tmp_path)
       @user_spot_link.save!
 
-      FileUtils.rm(tmp_path)
+      #FileUtils.rm(tmp_path)
     end
 
     render :nothing => true

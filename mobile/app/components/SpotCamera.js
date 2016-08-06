@@ -32,37 +32,39 @@ class SpotCamera extends Component {
   takePicture() {
     this.refs.camera.capture()
       .then((picture) => {
-        xhr = new XMLHttpRequest();
-        xhr.open('POST', this.pictureUploadUrl(), true);
-        xhr.setRequestHeader("Content-type", 'application/json');
+        this.setState({ uploadPercent: 'chargement' }, () => {
+          xhr = new XMLHttpRequest();
 
-        params = {
-          device_id: this.props.deviceId,
-          user_spot_link: {
-            picture: picture.data
+          xhr.onload = () => {
+            console.log(xhr.status, xhr.responseText);
+            this.props.onPop();
+            this.props.navigator.pop();
           }
-        }
 
-        xhr.send(JSON.stringify(params));
+          xhr.onerror = function() {}
 
-        xhr.onload = () => {
-          console.log(xhr.status, xhr.responseText);
-          this.props.onPop();
-          this.props.navigator.pop();
-        }
-
-        xhr.onerror = function() {}
-
-        xhr.upload.onprogress = (event) => {
-          if (event.lengthComputable) {
-            var percent = Math.round((event.loaded / event.total) * 100)
-            console.log(percent);
-
-            this.setState({
-              uploadPercent: percent
-            });
+          // don't work on android
+          xhr.upload.onprogress = (event) => {
+            if (event.lengthComputable) {
+              var percent = Math.round((event.loaded / event.total) * 100)
+              this.setState({
+                uploadPercent: percent
+              });
+            }
           }
-        }
+
+          xhr.open('POST', this.pictureUploadUrl(), true);
+          xhr.setRequestHeader("Content-type", 'application/json');
+
+          params = {
+            device_id: this.props.deviceId,
+            user_spot_link: {
+              picture: picture.data
+            }
+          }
+
+          xhr.send(JSON.stringify(params));
+        });
       })
       .catch(err => {
         console.error(err);
@@ -85,7 +87,9 @@ class SpotCamera extends Component {
                   orientation={Camera.constants.Orientation.portrait}
                   captureTarget={Camera.constants.CaptureTarget.memory}
                   captureQuality={Camera.constants.CaptureQuality.low}>
-            {text}
+            <View style={styles.captureContainer}>
+              {text}
+            </View>
           </Camera>
         </View>
         <View style={styles.example}>
@@ -99,13 +103,17 @@ class SpotCamera extends Component {
   renderTakePictureButton() {
     return (
       <Text style={styles.capture}
-            onPress={this.takePicture.bind(this)}>Capturer</Text>
+            onPress={this.takePicture.bind(this)}>
+        Capturer
+      </Text>
     )
   }
 
   renderProgressText() {
     return (
-      <Text style={styles.progress}>{this.state.uploadPercent} %</Text>
+      <Text style={styles.capture}>
+        {this.state.uploadPercent}
+      </Text>
     )
   }
 }

@@ -7,39 +7,35 @@ module.exports = StyleSheet.create({
     marginTop: GlobalStyles.headerMargin,
     backgroundColor: 'white'
   },
-
   example: {
     flex: 0.5
   },
-
   exampleImage: {
     height: Dimensions.get('window').height / 2,
     width:  Dimensions.get('window').width
   },
-
   camera: {
     flex: 0.5
   },
-
   preview: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
     //height: Dimensions.get('window').height / 2,
   },
-
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
+  captureContainer: {
     borderRadius: 5,
-    color: '#000',
+    backgroundColor: 'red',
     padding: 20,
     paddingTop: 14,
     paddingBottom: 14,
     margin: 20,
-    opacity: 0.5
+    opacity: 0.7
   },
-
+  capture: {
+    color: 'white',
+    fontWeight: '700',
+  },
   progress: {
     flex: 0,
     backgroundColor: '#000',

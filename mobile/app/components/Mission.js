@@ -113,7 +113,7 @@ class Mission extends Component {
   renderLoading() {
     return (
       <ScrollView style={styles.scroll}>
-        <Text>
+        <Text style={styles.loading}>
           Chargement...
         </Text>
       </ScrollView>
@@ -157,7 +157,7 @@ class Mission extends Component {
   }
 
   renderDistance(spot) {
-    if(this.state.position) {
+    if(this.state.position && spot.geolocalized) {
       return (
         <Text style={styles.distance}>
           { this.distance(spot) }

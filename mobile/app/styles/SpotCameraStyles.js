@@ -1,15 +1,25 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import GlobalStyles               from './GlobalStyles';
 
 module.exports = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    marginTop: GlobalStyles.headerMargin
+  },
+  example: {
+    flex: 0.5
+  },
+  exampleImage: {
+    height: Dimensions.get('window').height/2,
+    width:  Dimensions.get('window').width
+  },
+  camera: {
+    flex: 0.5
   },
   preview: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width
   },
   capture: {
     flex: 0,

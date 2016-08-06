@@ -6,8 +6,9 @@
       </div>
 
       <ul class="nav navbar-nav sections">
-        <% missions_tab_active = params[:controller] == 'admin/missions' || params[:controller] == 'admin/spots' %>
-        <% users_tab_active    = params[:controller] == 'admin/users'    %>
+        <% missions_tab_active        = params[:controller] == 'admin/missions' || params[:controller] == 'admin/spots' %>
+        <% users_tab_active           = params[:controller] == 'admin/users'    %>
+        <% user_spot_links_tab_active = params[:controller] == 'admin/user_spot_links' %>
 
         <li<%= ' class="active"'.html_safe if missions_tab_active %>>
           <a href="<%= admin_missions_path %>">Missions</a>
@@ -15,6 +16,10 @@
 
         <li<%= ' class="active"'.html_safe if users_tab_active %>>
           <a href="<%= admin_users_path %>">Utilisateurs</a>
+        </li>
+
+        <li<%= ' class="active"'.html_safe if user_spot_links_tab_active %>>
+          <a href="<%= admin_user_spot_links_path %>">Photos</a>
         </li>
       </ul>
 

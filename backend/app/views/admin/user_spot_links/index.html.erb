@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+
+    <% if @user_spot_links.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID du périphérique</th>
+            <th>Mission</th>
+            <th>Point</th>
+            <th>Photo sketch</th>
+            <th>Photo</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @user_spot_links.each do |link| %>
+            <tr>
+              <td><%= link.user.device_id %></td>
+              <td><%= link.spot.mission.name %></td>
+              <td><%= link.spot.name %></td>
+              <td><img src="<%= link.spot.picture.url(:sketch) %>" /></td>
+              <td><img src="<%= link.picture.url(:preview) %>" /></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

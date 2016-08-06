@@ -3,7 +3,9 @@ class CreateUserSpotLinks < ActiveRecord::Migration[5.0]
     create_table :user_spot_links do |t|
       t.references :user, foreign_key: true
       t.references :spot, foreign_key: true
-      t.string :picture
+
+      t.string  :picture
+      t.boolean :validated
 
       t.timestamps
     end

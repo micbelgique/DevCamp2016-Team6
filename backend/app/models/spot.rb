@@ -14,4 +14,10 @@ class Spot < ApplicationRecord
 
   validates :name, :presence => { :message => "Le nom est obligatoire." }
 
+  # Methods
+
+  def geolocalized?
+    latitude.present? && longitude.present?
+  end
+
 end

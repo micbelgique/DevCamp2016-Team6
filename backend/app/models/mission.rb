@@ -2,7 +2,8 @@ class Mission < ApplicationRecord
 
   # Associations
 
-  has_many :spots
+  has_many :spots, :dependent => :destroy
+  has_many :user_spot_links, :through => :spots
 
   # CarrierWave
 

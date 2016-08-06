@@ -16,14 +16,15 @@ import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class SpotPresenter {
+
     private Spot mSpot;
     private ViewActions mViewActions;
 
-    // Databinding Observables
     public ObservableField<String> spotName= new ObservableField<>("");
     public ObservableField<String> spotDescription = new ObservableField<>("");
     public ObservableField<String> imageURL = new ObservableField<>("");
     public ObservableField<Boolean> isOwned = new ObservableField<>(false);
+    public ObservableField<Boolean> displayMap = new ObservableField<>(false);
 
 
     public interface ViewActions {
@@ -40,6 +41,7 @@ public class SpotPresenter {
     }
 
     public void refresh() {
+        displayMap.set(mSpot.geolocalized);
         isOwned.set(mSpot.isOwned());
         spotName.set(mSpot.name);
         spotDescription.set(mSpot.description);

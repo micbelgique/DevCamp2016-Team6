@@ -2,40 +2,39 @@ package cliches.com.cliche.spot;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.StringRes;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
-import android.view.View;
-import android.widget.Toast;
+
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 
 import cliches.com.cliche.R;
 import cliches.com.cliche.databinding.ActivitySpotBinding;
 import cliches.com.cliche.models.Spot;
 import timber.log.Timber;
 
-public class SpotActivity extends AppCompatActivity implements SpotPresenter.ViewActions {
+public class SpotActivity extends AppCompatActivity implements SpotPresenter.ViewActions, OnMapReadyCallback {
 
     public static final String SPOT_KEY = "SPOT_KEY";
     private static final int REQUEST_IMAGE_CAPTURE = 42;
 
     private SpotPresenter mPresenter;
+    private Spot mCurrentSpot;
     private ActivitySpotBinding mViewBinding;
 
     private MaterialDialog mUploadingDialog;
@@ -46,19 +45,26 @@ public class SpotActivity extends AppCompatActivity implements SpotPresenter.Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Spot spot = (Spot) getIntent().getSerializableExtra(SPOT_KEY);
-        if(spot== null) {
+        mCurrentSpot = (Spot) getIntent().getSerializableExtra(SPOT_KEY);
+        if(mCurrentSpot == null) {
             Timber.w("Trying to open SpotActivity without a spot");
             return;
         }
 
-        mPresenter = new SpotPresenter(this, spot);
+        mPresenter = new SpotPresenter(this, mCurrentSpot);
         mViewBinding = DataBindingUtil.setContentView(this, R.layout.activity_spot);
         mViewBinding.setPresenter(mPresenter);
 
         setSupportActionBar(mViewBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mViewBinding.collapsingToolbar.setTitle(spot.name);
+
+        if(mPresenter.displayMap.get()) {
+            MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        }
+
+
+        mViewBinding.collapsingToolbar.setTitle(mCurrentSpot .name);
     }
 
     @Override
@@ -131,5 +137,15 @@ public class SpotActivity extends AppCompatActivity implements SpotPresenter.Vie
         }
 
         return imagePath;
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng spotPosition = mCurrentSpot.getCoordinates();
+        googleMap.addMarker(new MarkerOptions()
+                .position(spotPosition)
+                .title("Marker"));
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(spotPosition));
     }
 }

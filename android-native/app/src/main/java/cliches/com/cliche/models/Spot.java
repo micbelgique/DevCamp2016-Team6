@@ -1,6 +1,7 @@
 package cliches.com.cliche.models;
 
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -24,5 +25,9 @@ public class Spot implements Serializable {
 
     public boolean isOwned() {
         return ownPictureURL != null;
+    }
+
+    public LatLng getCoordinates() {
+        return new LatLng(latitude, longitude);
     }
 }

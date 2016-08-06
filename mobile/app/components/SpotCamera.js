@@ -47,18 +47,36 @@ class SpotCamera extends Component {
     return true;
   }
 
+  pictureUploadUrl() {
+    return 'http://cliche-backend.phonoid.net/api/missions/' + this.props.mission.id + '/spots/' + this.props.spot.id + '/user_spot_links'
+  }
+
   takePicture() {
     this.refs.camera.capture()
       .then((picture) => {
-        url = 'http://cliche-backend.phonoid.net/api/missions/' + this.props.mission.id + '/spots/' + this.props.spot.id + '/user_spot_links'
+        xhr = new XMLHttpRequest();
+        xhr.open('POST', this.pictureUploadUrl(), true);
+        xhr.setRequestHeader("Content-type", 'application/json');
 
-        new HttpService(url).post({
+        params = {
           device_id: this.props.deviceId,
           user_spot_link: {
             picture: picture.data
-          }}, (data) => {
-          console.log(data);
-        })
+          }
+        }
+
+        xhr.send(JSON.stringify(params));
+
+        xhr.onload = function () {
+          console.log(xhr.status, xhr.responseText)
+        }
+        xhr.onerror = function() {}
+        xhr.upload.onprogress = function (event) {
+          if (event.lengthComputable) {
+            var percent = Math.round((event.loaded / event.total) * 100)
+            console.log(percent);
+          }
+        }
       })
       .catch(err => {
         console.error(err);
@@ -69,16 +87,14 @@ class SpotCamera extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.camera}>
-          <TouchableWithoutFeedback onPress={this.takePicture.bind(this)}>
-            <Camera ref="camera"
-                    style={styles.preview}
-                    aspect={Camera.constants.Aspect.fill}
-                    orientation={Camera.constants.Orientation.auto}
-                    captureTarget={Camera.constants.CaptureTarget.memory}>
-              <Text style={styles.capture}
-                    onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
-            </Camera>
-          </TouchableWithoutFeedback>
+          <Camera ref="camera"
+                  style={styles.preview}
+                  aspect={Camera.constants.Aspect.fill}
+                  orientation={Camera.constants.Orientation.auto}
+                  captureTarget={Camera.constants.CaptureTarget.memory}>
+            <Text style={styles.capture}
+                  onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+          </Camera>
         </View>
         <View style={styles.example}>
           <Image style={styles.exampleImage} source={{uri: this.props.spot.picture}}>

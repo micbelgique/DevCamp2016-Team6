@@ -59,29 +59,31 @@ class Routes extends Component {
   }
 
   renderScene(route, navigator) {
-    if(route.controller == 'missions') {
-      if(route.action == 'index') {
-        return (
-          <Missions deviceId={this.state.deviceId}
-                    navigator={navigator}/>
-        )
+    if(this.state.deviceId != '') {
+      if(route.controller == 'missions') {
+        if(route.action == 'index') {
+          return (
+            <Missions deviceId={this.state.deviceId}
+                      navigator={navigator}/>
+          )
+        }
+        else if(route.action == 'show') {
+          return (
+            <Mission deviceId={this.state.deviceId}
+                     navigator={navigator}
+                     mission={route.mission} />
+          )
+        }
       }
-      else if(route.action == 'show') {
-        return (
-          <Mission deviceId={this.state.deviceId}
-                   navigator={navigator}
-                   mission={route.mission} />
-        )
-      }
-    }
-    else if(route.controller == "spots") {
-      if(route.action == 'show') {
-        return (
-          <SpotCamera deviceId={this.state.deviceId}
-                      navigator={navigator}
-                      mission={route.mission}
-                      spot={route.spot} />
-        )
+      else if(route.controller == "spots") {
+        if(route.action == 'show') {
+          return (
+            <SpotCamera deviceId={this.state.deviceId}
+                        navigator={navigator}
+                        mission={route.mission}
+                        spot={route.spot} />
+          )
+        }
       }
     }
   }

@@ -4,19 +4,19 @@ class PictureUploader < BasePublicUploader
   end
 
   version :preview do
-    process :resize_to_fit => [400, 200]
+    process :resize_to_fill => [400, 300]
   end
 
   version :tiny do
-    process :resize_to_fit => [100, 50]
+    process :resize_to_fill => [100, 75]
   end
 
   version :sketch do
-    process :sketchize => [400, 200]
+    process :sketchize => [400, 300]
   end
 
   version :tiny_sketch do
-    process :sketchize => [100, 50]
+    process :sketchize => [100, 75]
   end
 
   private

@@ -32,7 +32,7 @@ class Mission extends Component {
 
       navigator.geolocation.getCurrentPosition(
         (position) => this.setState({position}),
-      // (error)    => alert(error),
+        (error)    => console.log(error),
       //  {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
       );
       navigator.geolocation.watchPosition((position) => {
@@ -87,6 +87,19 @@ class Mission extends Component {
   }
 
   render() {
+    if(this.state.spots.length)
+      return this.renderScrollView();
+    else
+      return this.renderLoading();
+  }
+
+  renderLoading() {
+    return (
+      <Text>Chargement...</Text>
+    );
+  }
+
+  renderScrollView() {
     return (
       <ScrollView style={styles.scroll}>
         <View style={styles.imagesContainer}>
@@ -143,12 +156,20 @@ class Mission extends Component {
           <Text style={styles.name}>
             { spot.name }
           </Text>
-          <Text style={styles.name}>
-            { this.distance(spot) }
-          </Text>
+          { this.renderDistance(spot) }
         </Image>
       </View>
     );
+  }
+
+  renderDistance(spot) {
+    if(this.state.position) {
+      return (
+        <Text style={styles.distance}>
+          { this.distance(spot) }
+        </Text>
+      );
+    }
   }
 }
 

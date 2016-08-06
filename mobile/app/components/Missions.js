@@ -96,6 +96,7 @@ class Missions extends Component {
           <Text style={styles.name}>
             { mission.name }
           </Text>
+
           <Text style={styles.tagline}>
             { mission.tagline }
           </Text>

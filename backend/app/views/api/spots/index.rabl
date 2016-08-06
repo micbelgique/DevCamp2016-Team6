@@ -7,7 +7,7 @@ end
 
 node :own_picture do |spot|
   user_spot_link = spot.user_spot_links.where(:user_id => @user.id).first
-  user_spot_link.try(:picture).try(:url, :preview)
+  user_spot_link.try(:picture).try(:url, :sketch)
 end
 
 node :geolocalized do |spot|

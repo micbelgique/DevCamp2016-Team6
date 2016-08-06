@@ -112,6 +112,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mimemagic (0.3.2)
+    mini_magick (4.2.10)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     mysql2 (0.4.4)
@@ -208,6 +209,7 @@ DEPENDENCIES
   libv8
   listen
   lodash-rails
+  mini_magick
   mysql2
   rabl
   rails (~> 5.0.0)

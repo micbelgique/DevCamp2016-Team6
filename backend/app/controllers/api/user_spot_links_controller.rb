@@ -8,7 +8,7 @@ class Api::UserSpotLinksController < Api::BaseController
       tmp_path = "#{Rails.root}/tmp/#{UUIDTools::UUID.random_create}.pdf"
       data     = Base64.decode64(params[:user_spot_link][:picture])
 
-      File.open(tmp_path, 'b') do |file|
+      File.open(tmp_path, 'wb') do |file|
         file.write(data)
       end
 

@@ -32,7 +32,7 @@ class Mission extends Component {
 
       navigator.geolocation.getCurrentPosition(
         (position) => this.setState({position}),
-      // (error)    => alert(error),
+        (error)    => console.log(error),
       //  {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
       );
       navigator.geolocation.watchPosition((position) => {

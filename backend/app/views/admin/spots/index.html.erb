@@ -14,6 +14,7 @@
           <tr>
             <th>Nom</th>
             <th>Photo</th>
+            <th class="center">Géolocalisé</th>
             <th></th>
           </tr>
         </thead>
@@ -23,6 +24,7 @@
             <tr>
               <td><%= spot.name %></td>
               <td><img src="<%= spot.picture.url(:tiny) %>" /></td>
+              <td class="center"><%= spot.geolocalized? ? fa('check') : fa('times') %></td>
 
               <td class="actions">
                 <%= link_to fa('edit'),   edit_admin_mission_spot_path(@mission, spot), :class => 'btn btn-xs btn-default' %>

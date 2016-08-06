@@ -81,7 +81,8 @@ class Routes extends Component {
             <SpotCamera deviceId={this.state.deviceId}
                         navigator={navigator}
                         mission={route.mission}
-                        spot={route.spot} />
+                        spot={route.spot}
+                        onPop={route.onPop} />
           )
         }
       }

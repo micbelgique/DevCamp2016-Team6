@@ -20,9 +20,7 @@ class SpotCamera extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -67,10 +65,14 @@ class SpotCamera extends Component {
 
         xhr.send(JSON.stringify(params));
 
-        xhr.onload = function () {
-          console.log(xhr.status, xhr.responseText)
+        xhr.onload = () => {
+          console.log(xhr.status, xhr.responseText);
+          this.props.onPop();
+          this.props.navigator.pop();
         }
+
         xhr.onerror = function() {}
+
         xhr.upload.onprogress = function (event) {
           if (event.lengthComputable) {
             var percent = Math.round((event.loaded / event.total) * 100)

@@ -81,7 +81,8 @@ class Mission extends Component {
       controller: 'spots',
       action:     'show',
       mission:    this.props.mission,
-      spot:       spot
+      spot:       spot,
+      onPop:      this.reloadSpots.bind(this)
     });
   }
 

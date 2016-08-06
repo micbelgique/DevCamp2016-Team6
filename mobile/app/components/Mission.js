@@ -87,6 +87,19 @@ class Mission extends Component {
   }
 
   render() {
+    if(this.state.spots.length)
+      return this.renderScrollView();
+    else
+      return this.renderLoading();
+  }
+
+  renderLoading() {
+    return (
+      <Text>Chargement...</Text>
+    );
+  }
+
+  renderScrollView() {
     return (
       <ScrollView style={styles.scroll}>
         <View style={styles.imagesContainer}>

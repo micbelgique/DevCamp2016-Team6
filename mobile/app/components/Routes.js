@@ -6,7 +6,8 @@ import {
   View,
   StatusBar,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
+  Platform
 } from 'react-native';
 
 import Missions   from './Missions';
@@ -88,7 +89,7 @@ class Routes extends Component {
   renderNavigationBar() {
     return (
       <Navigator.NavigationBar navigationStyles={Navigator.NavigationBar.StylesIOS}
-                               style={styles.navBar}
+                               style={ styles.navBar }
                                routeMapper={NavBar({})}/>
     )
   }

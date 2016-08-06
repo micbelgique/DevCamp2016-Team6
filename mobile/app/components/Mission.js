@@ -11,21 +11,33 @@ import {
   Platform
 } from 'react-native';
 
-import HttpService from '../services/HttpService';
-import styles      from '../styles/MissionStyles';
+import HttpService     from '../services/HttpService';
+import DistanceService from '../services/DistanceService';
+import styles          from '../styles/MissionStyles';
 
 class Mission extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      spots: []
+      spots:     [],
+      latitude:  0,
+      longitude: 0
     };
   }
 
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
       this.reloadSpots();
+
+      this.watchID = navigator.geolocation.watchPosition((position) => {
+        console.log(position);
+
+        this.setState({
+          latitude:  position.coords.latitude,
+          longitude: position.coords.longitude,
+        })
+      });
     });
   }
 
@@ -92,11 +104,19 @@ class Mission extends Component {
   }
 
   renderSpotInside(spot) {
+    console.log(this.state.latitude);
+    console.log(this.state.longitude);
+    console.log(spot.latitude);
+    console.log(spot.longitude);
+
     return (
       <View>
         <Image style={styles.image} source={{uri: spot.picture}}>
           <Text style={styles.name}>
             { spot.name }
+          </Text>
+          <Text style={styles.name}>
+            Distance : { (DistanceService.get(this.state.latitude, this.state.longitude, spot.latitude, spot.longitude)*1000.0).toFixed(0) }m
           </Text>
         </Image>
       </View>

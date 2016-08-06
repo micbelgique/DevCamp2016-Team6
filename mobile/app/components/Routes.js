@@ -10,12 +10,12 @@ import {
   Platform
 } from 'react-native';
 
-import Missions   from './Missions';
-import Mission    from './Mission';
-import SpotCamera from './SpotCamera';
-import NavBar     from './NavBar';
-import Uuid       from '../services/Uuid';
-import styles     from '../styles/NavBarStyles';
+import Missions    from './Missions';
+import Mission     from './Mission';
+import SpotCamera  from './SpotCamera';
+import NavBar      from './NavBar';
+import UuidService from '../services/UuidService';
+import styles      from '../styles/NavBarStyles';
 
 class Routes extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class Routes extends Component {
         this.setState({deviceId: value});
       }
       else {
-        uuid = Uuid.generate();
+        uuid = UuidService.generate();
 
         AsyncStorage.setItem('deviceId', uuid, () => {
           this.setState({ deviceId: uuid });

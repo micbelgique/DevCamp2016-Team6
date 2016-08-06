@@ -1,4 +1,4 @@
-class Uuid {
+class UuidService {
   static generate() {
     s4 = function() {
       return Math.floor((1 + Math.random()) * 0x10000)
@@ -11,4 +11,4 @@ class Uuid {
   }
 }
 
-module.exports = Uuid;
+module.exports = UuidService;

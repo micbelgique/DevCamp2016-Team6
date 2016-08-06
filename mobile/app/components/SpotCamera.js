@@ -20,7 +20,9 @@ class SpotCamera extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      uploadPercent: -1
+    };
   }
 
   componentDidMount() {
@@ -73,10 +75,14 @@ class SpotCamera extends Component {
 
         xhr.onerror = function() {}
 
-        xhr.upload.onprogress = function (event) {
+        xhr.upload.onprogress = (event) => {
           if (event.lengthComputable) {
             var percent = Math.round((event.loaded / event.total) * 100)
             console.log(percent);
+
+            this.setState({
+              uploadPercent: percent
+            });
           }
         }
       })
@@ -86,6 +92,11 @@ class SpotCamera extends Component {
   }
 
   render() {
+    if(this.state.uploadPercent == -1)
+      text = this.renderTakePictureButton()
+    else
+      text = this.renderProgressText()
+
     return (
       <View style={styles.container}>
         <View style={styles.camera}>
@@ -94,8 +105,7 @@ class SpotCamera extends Component {
                   aspect={Camera.constants.Aspect.fill}
                   orientation={Camera.constants.Orientation.auto}
                   captureTarget={Camera.constants.CaptureTarget.memory}>
-            <Text style={styles.capture}
-                  onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+            {text}
           </Camera>
         </View>
         <View style={styles.example}>
@@ -104,6 +114,19 @@ class SpotCamera extends Component {
         </View>
       </View>
     );
+  }
+
+  renderTakePictureButton() {
+    return (
+      <Text style={styles.capture}
+            onPress={this.takePicture.bind(this)}>Photo !</Text>
+    )
+  }
+
+  renderProgressText() {
+    return (
+      <Text style={styles.progress}>{this.state.uploadPercent} %</Text>
+    )
   }
 }
 

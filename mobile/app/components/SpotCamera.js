@@ -25,28 +25,6 @@ class SpotCamera extends Component {
     };
   }
 
-  componentDidMount() {
-    this.back = this.back.bind(this)
-    this.bindBackButton();
-  }
-
-  componentWillUnmount() {
-    this.unbindBackButton();
-  }
-
-  bindBackButton() {
-    BackAndroid.addEventListener('hardwareBackPress', this.back);
-  }
-
-  unbindBackButton() {
-    BackAndroid.removeEventListener('hardwareBackPress', this.back);
-  }
-
-  back() {
-    this.props.navigator.pop();
-    return true;
-  }
-
   pictureUploadUrl() {
     return 'http://cliche-backend.phonoid.net/api/missions/' + this.props.mission.id + '/spots/' + this.props.spot.id + '/user_spot_links'
   }

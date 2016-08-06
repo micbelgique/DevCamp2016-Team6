@@ -109,9 +109,15 @@ class Mission extends Component {
     console.log(spot.latitude);
     console.log(spot.longitude);
 
+    if(spot.ownPicture) {
+      picture = spot.ownPicture
+    } else {
+      picture = spot.picture
+    }
+
     return (
       <View>
-        <Image style={styles.image} source={{uri: spot.picture}}>
+        <Image style={styles.image} source={{uri: picture}}>
           <Text style={styles.name}>
             { spot.name }
           </Text>

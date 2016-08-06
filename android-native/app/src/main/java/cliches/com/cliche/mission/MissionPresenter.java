@@ -27,6 +27,10 @@ public class MissionPresenter {
     public ObservableField<String> imageURL = new ObservableField<>("");
     public ObservableField<String> descriptionText = new ObservableField<>("");
 
+    public Mission getMission() {
+        return mCurrentMission;
+    }
+
     public interface ViewActions {
         void notifyNewData();
         void open(Spot spot);

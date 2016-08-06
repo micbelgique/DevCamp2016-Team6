@@ -1,6 +1,7 @@
 package cliches.com.cliche.mission;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,10 @@ import com.bumptech.glide.Glide;
 import cliches.com.cliche.R;
 import cliches.com.cliche.models.Spot;
 
-public class SpotsAdapter extends RecyclerView.Adapter<SpotsAdapter.SpotViewHolder> {
+public class SpotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int REGULAR_CELL = 0;
+    private static final int HEADER_CELL = 1;
 
     Context mContext;
     MissionPresenter mPresenter;
@@ -24,28 +28,79 @@ public class SpotsAdapter extends RecyclerView.Adapter<SpotsAdapter.SpotViewHold
     }
 
     @Override
-    public SpotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public int getItemCount() {
+        return mPresenter.spotsCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position == 0 ? HEADER_CELL : REGULAR_CELL;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        if(viewType == HEADER_CELL) {
+            View itemView = LayoutInflater
+                    .from(parent.getContext())
+                    .inflate(R.layout.line_item_description, parent, false);
+
+            return new MissionDescriptionViewHolder(itemView);
+        }
+
+        // Regular Cell
+
         View itemView = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.line_item_mission, parent, false);
+                .inflate(R.layout.line_item_spot, parent, false);
 
         return new SpotViewHolder(mPresenter, itemView);
     }
 
     @Override
-    public void onBindViewHolder(SpotViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if(getItemViewType(position) == HEADER_CELL) {
+            bindHeaderCell((MissionDescriptionViewHolder)holder);
+        } else {
+            bindRegularCell((SpotViewHolder)holder, position);
+        }
+    }
+
+    private void bindHeaderCell(MissionDescriptionViewHolder holder) {
+        holder.description.setText(mPresenter.getMission().description);
+    }
+
+    private void bindRegularCell(SpotViewHolder holder, int position) {
         Spot currentSpot = mPresenter.getSpot(position);
         holder.name.setText(currentSpot.name);
 
+        String urlToLoad = currentSpot.isOwned() ? currentSpot.ownPictureURL : currentSpot.pictureURL;
+
         Glide.with(mContext)
-                .load(currentSpot.pictureURL)
+                .load(urlToLoad)
                 .fitCenter()
                 .into(holder.image);
     }
 
-    @Override
-    public int getItemCount() {
-        return mPresenter.spotsCount();
+    public GridLayoutManager.SpanSizeLookup getSpanLookup() {
+        // Only the header needs to be spanned acrosse two columns
+        return new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position == 0 ? 2 : 1;
+            }
+        };
+    }
+
+    // View Holders
+
+    static class MissionDescriptionViewHolder extends RecyclerView.ViewHolder {
+        TextView description;
+
+        public MissionDescriptionViewHolder(View viewToHold) {
+            super(viewToHold);
+            description = (TextView) viewToHold.findViewById(R.id.description);
+        }
     }
 
     static class SpotViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

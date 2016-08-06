@@ -63,8 +63,7 @@ public class SpotActivity extends AppCompatActivity implements SpotPresenter.Vie
             mapFragment.getMapAsync(this);
         }
 
-
-        mViewBinding.collapsingToolbar.setTitle(mCurrentSpot .name);
+        mViewBinding.collapsingToolbar.setTitle(mCurrentSpot.name);
     }
 
     @Override
@@ -83,6 +82,7 @@ public class SpotActivity extends AppCompatActivity implements SpotPresenter.Vie
         if(mUploadingDialog == null) {
             mUploadingDialog = new MaterialDialog.Builder(this)
                     .content(R.string.dialog_picture_upload)
+                    .autoDismiss(false)
                     .progress(true, 0)
                     .progressIndeterminateStyle(true)
                     .build();

@@ -16,6 +16,7 @@ import cliches.com.cliche.mission.MissionPresenter;
 import cliches.com.cliche.mission.SpotsAdapter;
 import cliches.com.cliche.models.Spot;
 import cliches.com.cliche.spot.SpotActivity;
+import cliches.com.cliche.utils.GridSpacingDecorator;
 import timber.log.Timber;
 
 public class MissionActivity extends AppCompatActivity implements MissionPresenter.ViewActions {
@@ -53,8 +54,10 @@ public class MissionActivity extends AppCompatActivity implements MissionPresent
 
     private void setupRecyclerView() {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        layoutManager.setSpanSizeLookup(mSpotAdapter.getSpanLookup());
         mViewBinding.spotsList.setLayoutManager(layoutManager);
         mViewBinding.spotsList.setAdapter(mSpotAdapter);
+        mViewBinding.spotsList.addItemDecoration(new GridSpacingDecorator(2, 16));
     }
 
     private void setupToolbar() {

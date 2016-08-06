@@ -30,14 +30,7 @@ class Mission extends Component {
     InteractionManager.runAfterInteractions(() => {
       this.reloadSpots();
 
-      navigator.geolocation.getCurrentPosition(
-        (position) => this.setState({position}),
-        (error)    => console.log(error),
-      //  {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-      );
-      navigator.geolocation.watchPosition((position) => {
-        this.setState({position});
-      });
+      this.bindGeoLocation();
 
       this.back = this.back.bind(this)
       this.bindBackButton();
@@ -46,6 +39,7 @@ class Mission extends Component {
 
   componentWillUnmount() {
     this.unbindBackButton();
+    this.unbindGeolocation();
   }
 
   bindBackButton() {
@@ -54,6 +48,21 @@ class Mission extends Component {
 
   unbindBackButton() {
     BackAndroid.removeEventListener('hardwareBackPress', this.back);
+  }
+
+  bindGeoLocation() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => this.setState({position}),
+      (error)    => console.log(error),
+    //  {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+    this.watchId = navigator.geolocation.watchPosition((position) => {
+      this.setState({position});
+    });
+  }
+
+  unbindGeolocation () {
+    navigator.geolocation.clearWatch(this.watchId);
   }
 
   back() {

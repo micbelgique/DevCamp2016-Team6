@@ -7,7 +7,7 @@ module.exports = StyleSheet.create({
   },
   image: {
     flex: 1,
-    height: 300,
+    height: 304,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -32,8 +32,10 @@ module.exports = StyleSheet.create({
     borderRadius: 5,
     color: '#000',
     padding: 20,
-    margin: 40,
-    opacity: 0.8
+    paddingTop: 14,
+    paddingBottom: 14,
+    margin: 20,
+    opacity: 0.5
   },
 
   progress: {

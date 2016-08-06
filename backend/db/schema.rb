@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160805101452) do
     t.integer  "user_id"
     t.integer  "spot_id"
     t.string   "picture"
+    t.boolean  "validated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["spot_id"], name: "index_user_spot_links_on_spot_id", using: :btree

@@ -5,8 +5,10 @@ class Api::UserSpotLinksController < Api::BaseController
       @spot           = @mission.spots.find(params[:spot_id])
       @user_spot_link = @spot.user_spot_links.where(:user_id => @user.id).first_or_initialize
 
-      tmp_path = "#{Rails.root}/tmp/#{UUIDTools::UUID.random_create}.pdf"
+      tmp_path = "#{Rails.root}/tmp/#{UUIDTools::UUID.random_create}.jpg"
       data     = Base64.decode64(params[:user_spot_link][:picture])
+
+      Rails.logger.info tmp_path
 
       File.open(tmp_path, 'wb') do |file|
         file.write(data)

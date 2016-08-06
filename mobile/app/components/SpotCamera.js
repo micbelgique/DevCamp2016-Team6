@@ -7,7 +7,8 @@ import {
   Image,
   View,
   Platform,
-  Alert
+  Alert,
+  TouchableWithoutFeedback
 } from 'react-native';
 
 import HttpService from '../services/HttpService';
@@ -30,11 +31,13 @@ class SpotCamera extends Component {
   takePicture() {
     this.refs.camera.capture()
       .then((picture) => {
-        //Alert.alert(picture.path);
-
         url = 'http://cliche-backend.phonoid.net/api/missions/' + this.props.mission.id + '/spots/' + this.props.spot.id + '/user_spot_links'
 
-        new HttpService(url).post({ user_spot_link: { picture: picture.data }}, (data) => {
+        new HttpService(url).post({
+          device_id: this.props.deviceId,
+          user_spot_link: {
+            picture: picture.data
+          }}, (data) => {
           console.log(data);
         })
       })
@@ -46,14 +49,22 @@ class SpotCamera extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Camera ref="camera"
-                style={styles.preview}
-                aspect={Camera.constants.Aspect.fill}
-                orientation={Camera.constants.Orientation.auto}
-                captureTarget={Camera.constants.CaptureTarget.memory}>
-          <Text style={styles.capture}
-                onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
-        </Camera>
+        <View style={styles.camera}>
+          <TouchableWithoutFeedback onPress={this.takePicture.bind(this)}>
+            <Camera ref="camera"
+                    style={styles.preview}
+                    aspect={Camera.constants.Aspect.fill}
+                    orientation={Camera.constants.Orientation.auto}
+                    captureTarget={Camera.constants.CaptureTarget.memory}>
+              <Text style={styles.capture}
+                    onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+            </Camera>
+          </TouchableWithoutFeedback>
+        </View>
+        <View style={styles.example}>
+          <Image style={styles.exampleImage} source={{uri: this.props.spot.picture}}>
+          </Image>
+        </View>
       </View>
     );
   }

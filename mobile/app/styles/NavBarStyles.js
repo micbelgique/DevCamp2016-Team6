@@ -24,13 +24,13 @@ module.exports = StyleSheet.create({
   title: {
     textAlign: 'left',
     color: 'white',
-    marginTop: 14,
+    marginTop: 19,
     fontSize: 18,
     fontWeight: '500',
   },
   leftIconContainer: {
     marginLeft: Platform.OS == 'android' ? 8 : 2,
-    paddingTop: 15,
+    paddingTop: 19,
     paddingLeft: 8,
     paddingRight: 8,
     paddingBottom: 15.5

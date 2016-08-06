@@ -1,3 +1,3 @@
 module.exports = {
-  headerMargin: 70
+  headerMargin: 80
 }

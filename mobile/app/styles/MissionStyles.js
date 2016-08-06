@@ -22,7 +22,7 @@ module.exports = StyleSheet.create({
   },
   image: {
     width: vw(50),
-    height: 140,
+    height: 250,
     //flex: 1,
     //height: 300,
     //width: vw(50),

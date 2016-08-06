@@ -8,7 +8,8 @@ import {
   Image,
   ScrollView,
   View,
-  Platform
+  Platform,
+  BackAndroid
 } from 'react-native';
 
 import HttpService     from '../services/HttpService';
@@ -21,8 +22,7 @@ class Mission extends Component {
 
     this.state = {
       spots:     [],
-      latitude:  0,
-      longitude: 0
+      position:  null,
     };
   }
 
@@ -30,15 +30,35 @@ class Mission extends Component {
     InteractionManager.runAfterInteractions(() => {
       this.reloadSpots();
 
-      this.watchID = navigator.geolocation.watchPosition((position) => {
-        console.log(position);
-
-        this.setState({
-          latitude:  position.coords.latitude,
-          longitude: position.coords.longitude,
-        })
+      navigator.geolocation.getCurrentPosition(
+        (position) => this.setState({position}),
+      // (error)    => alert(error),
+      //  {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      );
+      navigator.geolocation.watchPosition((position) => {
+        this.setState({position});
       });
+
+      this.back = this.back.bind(this)
+      this.bindBackButton();
     });
+  }
+
+  componentWillUnmount() {
+    this.unbindBackButton();
+  }
+
+  bindBackButton() {
+    BackAndroid.addEventListener('hardwareBackPress',  this.back);
+  }
+
+  unbindBackButton() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.back);
+  }
+
+  back() {
+    this.props.navigator.pop();
+    return true;
   }
 
   spotsUrl() {
@@ -103,17 +123,18 @@ class Mission extends Component {
     );
   }
 
-  renderSpotInside(spot) {
-    console.log(this.state.latitude);
-    console.log(this.state.longitude);
-    console.log(spot.latitude);
-    console.log(spot.longitude);
+  distance(spot) {
+    if(this.state.position)
+      return "Distance : " + (DistanceService.get(this.state.position.coords.latitude,
+                                                  this.state.position.coords.longitude,
+                                                  spot.latitude,
+                                                  spot.longitude)*1000.0).toFixed(0) + "m";
+    else
+      return ''
+  }
 
-    if(spot.ownPicture) {
-      picture = spot.ownPicture
-    } else {
-      picture = spot.picture
-    }
+  renderSpotInside(spot) {
+    picture = spot.ownPicture ? spot.ownPicture : spot.picture
 
     return (
       <View>
@@ -122,7 +143,7 @@ class Mission extends Component {
             { spot.name }
           </Text>
           <Text style={styles.name}>
-            Distance : { (DistanceService.get(this.state.latitude, this.state.longitude, spot.latitude, spot.longitude)*1000.0).toFixed(0) }m
+            { this.distance(spot) }
           </Text>
         </Image>
       </View>

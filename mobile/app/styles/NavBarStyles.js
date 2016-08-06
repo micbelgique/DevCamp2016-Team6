@@ -30,7 +30,7 @@ module.exports = StyleSheet.create({
   },
   leftIconContainer: {
     marginLeft: Platform.OS == 'android' ? 8 : 2,
-    paddingTop: 19,
+    paddingTop: 20,
     paddingLeft: 8,
     paddingRight: 8,
     paddingBottom: 15.5

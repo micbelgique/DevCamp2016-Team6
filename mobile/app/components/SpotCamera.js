@@ -8,7 +8,8 @@ import {
   View,
   Platform,
   Alert,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  BackAndroid
 } from 'react-native';
 
 import HttpService from '../services/HttpService';
@@ -25,7 +26,25 @@ class SpotCamera extends Component {
   }
 
   componentDidMount() {
+    this.back = this.back.bind(this)
+    this.bindBackButton();
+  }
 
+  componentWillUnmount() {
+    this.unbindBackButton();
+  }
+
+  bindBackButton() {
+    BackAndroid.addEventListener('hardwareBackPress', this.back);
+  }
+
+  unbindBackButton() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.back);
+  }
+
+  back() {
+    this.props.navigator.pop();
+    return true;
   }
 
   takePicture() {

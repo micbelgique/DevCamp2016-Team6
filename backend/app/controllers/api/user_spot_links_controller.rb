@@ -5,7 +5,9 @@ class Api::UserSpotLinksController < Api::BaseController
       @spot           = @mission.spots.find(params[:spot_id])
       @user_spot_link = @spot.user_spot_links.where(:user_id => @user.id).first_or_initialize
 
-      @user_spot_link.assign_attributes(strong_params)
+      data = "data:image/jpg;base64,#{strong_params[:picture]}"
+
+      @user_spot_link.picture = data
       @user_spot_link.save!
     end
 

@@ -5,6 +5,7 @@ gem 'mysql2'
 
 gem 'rmagick'
 gem 'carrierwave'
+gem 'carrierwave-base64'
 
 gem 'sass-rails'
 gem 'uglifier'

@@ -26,6 +26,6 @@ class Api::UserSpotLinksController < Api::BaseController
       end
     end
 
-    render :nothing => true
+    render :json => { :success => true }
   end
 end

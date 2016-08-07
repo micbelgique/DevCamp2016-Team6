@@ -122,7 +122,7 @@ public class SpotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @Override
         public void onClick(View view) {
-            mPresenter.openSpot(getAdapterPosition());
+            mPresenter.openSpot(getAdapterPosition(), image);
         }
     }
 }

@@ -6,5 +6,8 @@
     <string name="takePictureAction">Prendre la photo</string>
     <string name="dialog_picture_upload">Uploading your picture!</string>
     <string name="show_on_map">Show on map</string>
-    <string name="mission_image_transition">MissionTransition</string>
+
+    <!-- Transition names -->
+    <string translatable="false" name="mission_image_transition">MissionImageTransition</string>
+    <string translatable="false" name="spot_image_transition">SpotImageTransition</string>
 </resources>

@@ -2,6 +2,7 @@ package cliches.com.cliche.screens.mission;
 
 
 import android.databinding.ObservableField;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class MissionPresenter {
 
     public interface ViewActions {
         void notifyNewData();
-        void open(Spot spot);
+        void open(Spot spot, View sharedView);
     }
 
     public MissionPresenter(ViewActions viewActions, Mission mission) {
@@ -48,9 +49,9 @@ public class MissionPresenter {
         return mSpots.get(position);
     }
 
-    public void openSpot(int position) {
+    public void openSpot(int position, View sharedView) {
         Spot tappedSpot = mSpots.get(position);
-        mViewAction.open(tappedSpot);
+        mViewAction.open(tappedSpot, sharedView);
     }
 
     public void refreshDisplay() {

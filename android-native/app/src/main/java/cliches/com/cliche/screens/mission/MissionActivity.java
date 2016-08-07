@@ -1,10 +1,12 @@
 package cliches.com.cliche.screens.mission;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.view.View;
 
 import cliches.com.cliche.R;
 import cliches.com.cliche.databinding.ActivityMissionBinding;
@@ -69,10 +71,14 @@ public class MissionActivity extends AppCompatActivity implements MissionPresent
     }
 
     @Override
-    public void open(Spot spot) {
+    public void open(Spot spot, View sharedView) {
+
+        String transitionName = getString(R.string.spot_image_transition);
+        ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this, sharedView, transitionName);
+
         Intent intent = new Intent(this, SpotActivity.class);
         intent.putExtra(SpotActivity.SPOT_KEY, spot);
 
-        startActivity(intent);
+        startActivity(intent, transitionActivityOptions.toBundle());
     }
 }

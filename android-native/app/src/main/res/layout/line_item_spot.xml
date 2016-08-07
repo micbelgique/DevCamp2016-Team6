@@ -9,6 +9,7 @@
     <ImageView
         android:id="@+id/image"
         tools:src="@drawable/spot_example"
+        android:transitionName="@string/spot_image_transition"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />

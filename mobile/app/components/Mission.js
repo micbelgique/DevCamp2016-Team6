@@ -51,7 +51,7 @@ class Mission extends Component {
     navigator.geolocation.getCurrentPosition(
       this.successCallback.bind(this),
       this.errorCallbackHighAccuracy.bind(this),
-      {maximumAge: 600000, timeout: 5000, enableHighAccuracy: true}
+      {maximumAge: 10000, timeout: 5000, enableHighAccuracy: true}
     );
   }
 
@@ -75,7 +75,7 @@ class Mission extends Component {
       navigator.geolocation.getCurrentPosition(
         this.successCallback.bind(this),
         (error)    => console.log(error),
-        {maximumAge:600000, timeout:10000, enableHighAccuracy: false}
+        {maximumAge:10000, timeout:10000, enableHighAccuracy: false}
       );
       return;
     }

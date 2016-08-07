@@ -44,10 +44,10 @@ Stack:
 
 ### Screenshots
 
-![](screenshots/native-confirm-picture.png)
-![](screenshots/native-mission-description.png)
 ![](screenshots/native-missions-list.png)
+![](screenshots/native-mission-description.png)
 ![](screenshots/native-mission-spots.png)
-![](screenshots/native-spot-map.png)
 ![](screenshots/native-unlocked-spot.png)
+![](screenshots/native-spot-map.png)
+![](screenshots/native-confirm-picture.png)
 

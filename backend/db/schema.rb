@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805101452) do
+ActiveRecord::Schema.define(version: 20160807102728) do
 
   create_table "missions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
     t.string   "name"
     t.string   "tagline"
     t.text     "description", limit: 65535
     t.string   "picture"
-    t.float    "latitude",    limit: 24
-    t.float    "longitude",   limit: 24
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.decimal  "latitude",                  precision: 12, scale: 8
+    t.decimal  "longitude",                 precision: 12, scale: 8
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   create_table "spots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci" do |t|
@@ -28,10 +28,10 @@ ActiveRecord::Schema.define(version: 20160805101452) do
     t.string   "name"
     t.text     "description", limit: 65535
     t.string   "picture"
-    t.float    "latitude",    limit: 24
-    t.float    "longitude",   limit: 24
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.decimal  "latitude",                  precision: 12, scale: 8
+    t.decimal  "longitude",                 precision: 12, scale: 8
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.index ["mission_id"], name: "index_spots_on_mission_id", using: :btree
   end
 

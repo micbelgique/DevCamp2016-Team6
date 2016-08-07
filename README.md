@@ -57,4 +57,5 @@ Stack:
 ![](screenshots/native-unlocked-spot.png)
 ![](screenshots/native-spot-map.png)
 ![](screenshots/native-confirm-picture.png)
+![](screenshots/native-uploading.png)
 

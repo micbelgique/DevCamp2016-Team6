@@ -25,7 +25,8 @@
 
         <!-- Activities -->
 
-        <activity android:name=".screens.missions.MissionsListActivity">
+        <activity
+            android:name=".screens.missions.MissionsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

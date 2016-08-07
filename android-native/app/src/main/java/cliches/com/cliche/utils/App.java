@@ -30,6 +30,7 @@ public class App extends Application {
         super.onCreate();
         sInstance = this;
         initializeTimber();
+        initializeSingletons();
         initializePrefs();
         initializeWebService();
     }
@@ -38,6 +39,10 @@ public class App extends Application {
         if(BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+    }
+
+    private void initializeSingletons() {
+        ResourcesHelper.init(this);
     }
 
     private void initializePrefs() {

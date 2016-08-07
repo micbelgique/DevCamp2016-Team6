@@ -4,30 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="160dp">
+    android:layout_height="240dp">
 
     <ImageView
         android:id="@+id/image"
+        tools:src="@drawable/spot_example"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
-    <TextView
-        tools:text="Ta Mere"
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@color/md_blue_grey_900"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="#A0000000"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-    <TextView
-        tools:text="La super attraction du bonheur"
-        android:id="@+id/tagline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/name"
-        android:textColor="@color/md_grey_800"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
+        <TextView
+            tools:text="Ta Mere"
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/md_white_1000"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/owned"
+            android:src="@drawable/ic_check_white_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 </RelativeLayout>

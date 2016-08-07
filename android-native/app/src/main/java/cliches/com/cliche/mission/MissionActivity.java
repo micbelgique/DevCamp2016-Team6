@@ -17,6 +17,7 @@ import cliches.com.cliche.mission.SpotsAdapter;
 import cliches.com.cliche.models.Spot;
 import cliches.com.cliche.spot.SpotActivity;
 import cliches.com.cliche.utils.GridSpacingDecorator;
+import cliches.com.cliche.utils.ResourcesHelper;
 import timber.log.Timber;
 
 public class MissionActivity extends AppCompatActivity implements MissionPresenter.ViewActions {
@@ -57,7 +58,7 @@ public class MissionActivity extends AppCompatActivity implements MissionPresent
         layoutManager.setSpanSizeLookup(mSpotAdapter.getSpanLookup());
         mViewBinding.spotsList.setLayoutManager(layoutManager);
         mViewBinding.spotsList.setAdapter(mSpotAdapter);
-        mViewBinding.spotsList.addItemDecoration(new GridSpacingDecorator(2, 16));
+        mViewBinding.spotsList.addItemDecoration(new GridSpacingDecorator(2, ResourcesHelper.get().dpToPx(4)));
     }
 
     private void setupToolbar() {

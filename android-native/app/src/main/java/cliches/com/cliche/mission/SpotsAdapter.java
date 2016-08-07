@@ -72,9 +72,10 @@ public class SpotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private void bindRegularCell(SpotViewHolder holder, int position) {
         Spot currentSpot = mPresenter.getSpot(position);
-        holder.name.setText(currentSpot.name);
-
         String urlToLoad = currentSpot.isOwned() ? currentSpot.ownPictureURL : currentSpot.pictureURL;
+
+        holder.name.setText(currentSpot.name);
+        holder.ownCheck.setVisibility(currentSpot.isOwned() ? View.VISIBLE : View.GONE);
 
         Glide.with(mContext)
                 .load(urlToLoad)
@@ -107,11 +108,13 @@ public class SpotsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         MissionPresenter mPresenter;
         TextView name;
         ImageView image;
+        ImageView ownCheck;
 
         public SpotViewHolder(MissionPresenter presenter, View viewToHold) {
             super(viewToHold);
             name = (TextView) viewToHold.findViewById(R.id.name);
             image = (ImageView) viewToHold.findViewById(R.id.image);
+            ownCheck = (ImageView) viewToHold.findViewById(R.id.owned);
 
             mPresenter = presenter;
             itemView.setOnClickListener(this);

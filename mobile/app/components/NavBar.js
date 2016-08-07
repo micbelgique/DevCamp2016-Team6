@@ -18,8 +18,13 @@ var NavBar = props => ({
     if(missionsShow || spotsShow) {
       leftIconName = Platform.OS == 'android' ? 'arrow-back' : 'keyboard-arrow-left';
 
+      backAction = () => {
+        route.onPop ? route.onPop() : null;
+        navigator.pop();
+      }
+
       return (
-        <TouchableOpacity onPress={navigator.pop}>
+        <TouchableOpacity onPress={backAction}>
           <View style={styles.leftIconContainer}>
             <Icon name={leftIconName}
                   style={styles.leftIcon} />

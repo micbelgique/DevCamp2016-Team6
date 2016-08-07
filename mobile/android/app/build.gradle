@@ -90,8 +90,8 @@ android {
         applicationId "com.cliche"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 4
-        versionName "1.04"
+        versionCode 7
+        versionName "1.07"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

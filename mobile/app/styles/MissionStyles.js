@@ -11,7 +11,9 @@ function vh(percentageHeight) {
 
 module.exports = StyleSheet.create({
   scroll: {
-    marginTop: GlobalStyles.headerMargin
+    flex: 1,
+    marginTop: GlobalStyles.headerMargin,
+    backgroundColor: 'white'
   },
   imagesContainer: {
     flex: 1,
@@ -53,5 +55,10 @@ module.exports = StyleSheet.create({
     padding: 4,
     paddingLeft: 8,
     paddingRight: 8,
+  },
+  loading: {
+    color: '#888888',
+    textAlign: 'center',
+    marginTop: 60
   }
 });

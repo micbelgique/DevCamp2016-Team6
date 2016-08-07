@@ -1,4 +1,4 @@
-var humps = require('humps');
+import humps from 'humps';
 
 class HttpService {
   constructor(url) {
@@ -6,7 +6,7 @@ class HttpService {
   }
 
   get(request, callback) {
-    requestString = this._stringify(request)
+    requestString = this._stringify(humps.decamelizeKeys(request))
 
     console.log(this.url + '?' + requestString);
 

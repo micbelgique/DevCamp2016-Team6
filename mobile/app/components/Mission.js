@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
   InteractionManager,
-  TouchableNativeFeedback,
-  TouchableOpacity,
+  TouchableHighlight,
   StyleSheet,
   Text,
   Image,
@@ -29,10 +28,7 @@ class Mission extends Component {
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
       this.reloadSpots();
-
       this.bindGeoLocation();
-
-      this.back = this.back.bind(this)
       this.bindBackButton();
     });
   }
@@ -43,6 +39,7 @@ class Mission extends Component {
   }
 
   bindBackButton() {
+    this.back = this.back.bind(this)
     BackAndroid.addEventListener('hardwareBackPress',  this.back);
   }
 
@@ -66,6 +63,7 @@ class Mission extends Component {
   }
 
   back() {
+    this.props.onPop();
     this.props.navigator.pop();
     return true;
   }
@@ -78,21 +76,38 @@ class Mission extends Component {
     url = this.spotsUrl()
 
     new HttpService(url).get({
-      device_id: this.props.deviceId
+      deviceId: this.props.deviceId
     }, data => {
       console.log(data);
       this.setState({ spots: data });
     });
   }
 
+  // removeOwnPicture(spot_id) {
+  //   this.spots.forEach((spot) => {
+  //     if(spot.id == spot_id)
+  //       spot.ownPicture = null
+  //   })
+  // }
+
   goToSpot(spot) {
     this.props.navigator.push({
-      controller: 'spots',
-      action:     'show',
-      mission:    this.props.mission,
-      spot:       spot,
-      onPop:      this.reloadSpots.bind(this)
+      controller:       'spots',
+      action:           'show',
+      mission:          this.props.mission,
+      spot:             spot,
+      onPop:            this.reloadSpots.bind(this)
     });
+  }
+
+  distance(spot) {
+    if(this.state.position)
+      return "Distance : " + (DistanceService.get(this.state.position.coords.latitude,
+                                                  this.state.position.coords.longitude,
+                                                  spot.latitude,
+                                                  spot.longitude)*1000.0).toFixed(0) + "m";
+    else
+      return ''
   }
 
   render() {
@@ -104,7 +119,11 @@ class Mission extends Component {
 
   renderLoading() {
     return (
-      <Text>Chargement...</Text>
+      <ScrollView style={styles.scroll}>
+        <Text style={styles.loading}>
+          Chargement...
+        </Text>
+      </ScrollView>
     );
   }
 
@@ -120,40 +139,13 @@ class Mission extends Component {
 
   renderSpots() {
     return this.state.spots.map((spot) => {
-      if(Platform.OS === 'ios')
-        return this.renderSpotForIOS(spot);
-      else
-        return this.renderSpotForAndroid(spot);
+      return (
+        <TouchableHighlight key={spot.id}
+                            onPress={this.goToSpot.bind(this, spot)}>
+          { this.renderSpotInside(spot) }
+        </TouchableHighlight>
+      );
     })
-  }
-
-  renderSpotForAndroid(spot) {
-    return (
-      <TouchableNativeFeedback key={spot.id}
-                               onPress={this.goToSpot.bind(this, spot)}
-                               background={TouchableNativeFeedback.SelectableBackground()}>
-        { this.renderSpotInside(spot) }
-      </TouchableNativeFeedback>
-    );
-  }
-
-  renderSpotForIOS(spot) {
-    return (
-      <TouchableOpacity key={spot.id}
-                        onPress={this.goToSpot.bind(this, spot)}>
-        { this.renderSpotInside(spot) }
-      </TouchableOpacity>
-    );
-  }
-
-  distance(spot) {
-    if(this.state.position)
-      return "Distance : " + (DistanceService.get(this.state.position.coords.latitude,
-                                                  this.state.position.coords.longitude,
-                                                  spot.latitude,
-                                                  spot.longitude)*1000.0).toFixed(0) + "m";
-    else
-      return ''
   }
 
   renderSpotInside(spot) {
@@ -172,7 +164,7 @@ class Mission extends Component {
   }
 
   renderDistance(spot) {
-    if(this.state.position) {
+    if(this.state.position && spot.geolocalized) {
       return (
         <Text style={styles.distance}>
           { this.distance(spot) }

@@ -1,111 +1,153 @@
 import React, { Component } from 'react';
 import {
-  TouchableNativeFeedback,
   TouchableOpacity,
+  TouchableHighlight,
   StyleSheet,
   Text,
   Image,
   View,
   Platform,
   Alert,
-  TouchableWithoutFeedback,
   BackAndroid
 } from 'react-native';
 
 import HttpService from '../services/HttpService';
 import styles      from '../styles/SpotCameraStyles';
 import Camera      from 'react-native-camera';
+import humps       from 'humps';
 
 class SpotCamera extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      spot:          this.props.spot,
       uploadPercent: -1
     };
   }
 
   pictureUploadUrl() {
-    return 'http://cliche-backend.phonoid.net/api/missions/' + this.props.mission.id + '/spots/' + this.props.spot.id + '/user_spot_links'
+    return 'http://cliche-backend.phonoid.net/api/missions/' + this.props.mission.id + '/spots/' + this.state.spot.id + '/user_spot_links'
   }
 
   takePicture() {
     this.refs.camera.capture()
       .then((picture) => {
-        xhr = new XMLHttpRequest();
-        xhr.open('POST', this.pictureUploadUrl(), true);
-        xhr.setRequestHeader("Content-type", 'application/json');
+        this.setState({ uploadPercent: 'chargement' }, () => {
+          xhr = new XMLHttpRequest();
 
-        params = {
-          device_id: this.props.deviceId,
-          user_spot_link: {
-            picture: picture.data
+          xhr.onload = () => {
+            console.log(xhr.status, xhr.responseText);
+            if(this.props.navigator.getCurrentRoutes().length == 3) { // still in missions > mission > spotCamera
+              this.props.onPop();
+              this.props.navigator.pop();
+            }
           }
-        }
 
-        xhr.send(JSON.stringify(params));
+          xhr.onerror = function() {}
 
-        xhr.onload = () => {
-          console.log(xhr.status, xhr.responseText);
-          this.props.onPop();
-          this.props.navigator.pop();
-        }
-
-        xhr.onerror = function() {}
-
-        xhr.upload.onprogress = (event) => {
-          if (event.lengthComputable) {
-            var percent = Math.round((event.loaded / event.total) * 100)
-            console.log(percent);
-
-            this.setState({
-              uploadPercent: percent
-            });
+          // don't work on android
+          xhr.upload.onprogress = (event) => {
+            if (event.lengthComputable) {
+              var percent = Math.round((event.loaded / event.total) * 100)
+              this.setState({
+                uploadPercent: percent
+              });
+            }
           }
-        }
+
+          xhr.open('POST', this.pictureUploadUrl(), true);
+          xhr.setRequestHeader("Content-type", 'application/json');
+
+          params = humps.decamelizeKeys({
+            deviceId: this.props.deviceId,
+            userSpotLink: {
+              picture: picture.data
+            }
+          })
+
+          xhr.send(JSON.stringify(params));
+        });
       })
       .catch(err => {
         console.error(err);
       })
   }
 
-  render() {
-    if(this.state.uploadPercent == -1)
-      text = this.renderTakePictureButton()
-    else
-      text = this.renderProgressText()
+  removePicture() {
+    spot = this.state.spot;
+    spot.ownPicture = null;
+    new HttpService(this.pictureUploadUrl()).post({
+      deviceId: this.props.deviceId
+    })
+    this.setState({spot: spot});
+  }
 
+  render() {
     return (
       <View style={styles.container}>
-        <View style={styles.camera}>
-          <Camera ref="camera"
-                  style={styles.preview}
-                  aspect={Camera.constants.Aspect.fill}
-                  captureAudio={false}
-                  orientation={Camera.constants.Orientation.portrait}
-                  captureTarget={Camera.constants.CaptureTarget.memory}
-                  captureQuality={Camera.constants.CaptureQuality.low}>
-            {text}
-          </Camera>
+        <View style={styles.imageOrCamera}>
+          { this.renderImageOrCamera() }
         </View>
         <View style={styles.example}>
-          <Image style={styles.exampleImage} source={{uri: this.props.spot.picture}}>
+          <Image style={styles.exampleImage} source={{uri: this.state.spot.picture}}>
           </Image>
         </View>
       </View>
     );
   }
 
+  renderImageOrCamera() {
+    if(this.state.spot.ownPicture) {
+      return (
+        <Image style={styles.exampleImage} source={{uri: this.state.spot.ownPicture}}>
+          <View style={styles.removeImageButton}>
+            <TouchableHighlight onPress={this.removePicture.bind(this)}>
+              <Text style={styles.removeImageText}>
+                Retirer
+              </Text>
+            </TouchableHighlight>
+          </View>
+        </Image>
+      )
+    }
+    else {
+      if(this.state.uploadPercent == -1)
+        text = this.renderTakePictureButton()
+      else
+        text = this.renderProgressText()
+
+      return (
+        <Camera ref="camera"
+                style={styles.preview}
+                aspect={Camera.constants.Aspect.fill}
+                captureAudio={false}
+                orientation={Camera.constants.Orientation.portrait}
+                captureTarget={Camera.constants.CaptureTarget.memory}
+                captureQuality={Camera.constants.CaptureQuality.low}>
+          <View style={styles.captureContainer}>
+            {text}
+          </View>
+        </Camera>
+      )
+    }
+  }
+
   renderTakePictureButton() {
     return (
-      <Text style={styles.capture}
-            onPress={this.takePicture.bind(this)}>Capturer</Text>
+      <TouchableHighlight onPress={this.takePicture.bind(this)}>
+        <Text style={styles.capture}>
+          Capturer
+        </Text>
+      </TouchableHighlight>
     )
   }
 
   renderProgressText() {
     return (
-      <Text style={styles.progress}>{this.state.uploadPercent} %</Text>
+      <Text style={styles.capture}>
+        {this.state.uploadPercent}
+      </Text>
     )
   }
 }

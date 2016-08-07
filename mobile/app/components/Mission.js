@@ -47,19 +47,42 @@ class Mission extends Component {
     BackAndroid.removeEventListener('hardwareBackPress', this.back);
   }
 
-  bindGeoLocation() {
+  refreshGeoLocation() {
     navigator.geolocation.getCurrentPosition(
-      (position) => this.setState({position}),
-      (error)    => console.log(error),
-    //  {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      this.successCallback.bind(this),
+      this.errorCallbackHighAccuracy.bind(this),
+      {maximumAge: 600000, timeout: 5000, enableHighAccuracy: true}
     );
-    this.watchId = navigator.geolocation.watchPosition((position) => {
-      this.setState({position});
-    });
   }
 
-  unbindGeolocation () {
-    navigator.geolocation.clearWatch(this.watchId);
+  bindGeoLocation() {
+    if(!this.geolocationIntervalId) {
+      this.geolocationIntervalId = setInterval(this.refreshGeoLocation.bind(this), 6000)
+    }
+  }
+
+  unbindGeolocation() {
+    if(this.geolocationIntervalId) {
+      clearInterval(this.geolocationIntervalId);
+      this.geolocationIntervalId = undefined
+    }
+  }
+
+  errorCallbackHighAccuracy(error) {
+    if(error.code == error.TIMEOUT){
+      // Attempt to get GPS loc timed out after 5 seconds,
+      // try low accuracy location
+      navigator.geolocation.getCurrentPosition(
+        this.successCallback.bind(this),
+        (error)    => console.log(error),
+        {maximumAge:600000, timeout:10000, enableHighAccuracy: false}
+      );
+      return;
+    }
+  }
+
+  successCallback(position) {
+    this.setState({position: position});
   }
 
   back() {
@@ -108,7 +131,7 @@ class Mission extends Component {
                                      spot.longitude)
 
       if(distance < 1.0) {
-        distance = distance * 1000
+        distance = (distance * 1000).toFixed(0)
         unit     = 'm'
       }
       else if(distance < 10.0) {

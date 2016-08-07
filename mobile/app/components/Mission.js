@@ -101,13 +101,29 @@ class Mission extends Component {
   }
 
   distance(spot) {
-    if(this.state.position)
-      return "Distance : " + (DistanceService.get(this.state.position.coords.latitude,
-                                                  this.state.position.coords.longitude,
-                                                  spot.latitude,
-                                                  spot.longitude)*1000.0).toFixed(0) + "m";
+    if(this.state.position) {
+      distance = DistanceService.get(this.state.position.coords.latitude,
+                                     this.state.position.coords.longitude,
+                                     spot.latitude,
+                                     spot.longitude)
+
+      if(distance < 1.0) {
+        distance = distance * 1000
+        unit     = 'm'
+      }
+      else if(distance < 10.0) {
+        distance = distance.toFixed(2)
+        unit     = 'km'
+      }
+      else {
+        distance = distance.toFixed(0)
+        unit     = 'km'
+      }
+
+      return "Distance : " + distance + unit;
+    }
     else
-      return ''
+      return '';
   }
 
   render() {

@@ -1,10 +1,12 @@
 package cliches.com.cliche.screens.missions;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.ImageView;
 
 import cliches.com.cliche.R;
 import cliches.com.cliche.databinding.ActivityMissionsListBinding;
@@ -48,9 +50,12 @@ public class MissionsListActivity extends AppCompatActivity implements MissionsL
     }
 
     @Override
-    public void open(Mission tappedMission) {
+    public void open(Mission tappedMission, ImageView sharedView) {
+        String transitionName = getString(R.string.mission_image_transition);
+        ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this, sharedView, transitionName);
+
         Intent intent = new Intent(this, MissionActivity.class);
         intent.putExtra(MissionActivity.MISSION_KEY, tappedMission);
-        startActivity(intent);
+        startActivity(intent, transitionActivityOptions.toBundle());
     }
 }

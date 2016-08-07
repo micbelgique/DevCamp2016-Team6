@@ -13,6 +13,7 @@
 
     <ImageView
         tools:src="@drawable/spot_example"
+        android:transitionName="@string/mission_image_transition"
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="300dp"

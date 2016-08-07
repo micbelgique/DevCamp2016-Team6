@@ -1,6 +1,8 @@
 package cliches.com.cliche.screens.missions;
 
 
+import android.widget.ImageView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,15 +26,15 @@ public class MissionsListPresenter {
         return mMissions.size();
     }
 
-    public void openMission(int position) {
+    public void openMission(int position, ImageView sharedView) {
         Mission tappedMission = mMissions.get(position);
 
-        mViewActions.open(tappedMission);
+        mViewActions.open(tappedMission, sharedView);
     }
 
     public interface ViewActions {
         void notifyNewData();
-        void open(Mission tappedMission);
+        void open(Mission tappedMission, ImageView sharedView);
     }
 
     public MissionsListPresenter(ViewActions viewActions) {

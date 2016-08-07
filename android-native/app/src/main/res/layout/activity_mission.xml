@@ -34,6 +34,7 @@
 
                 <ImageView
                     tools:src="@drawable/spot_example"
+                    android:transitionName="@string/mission_image_transition"
                     app:imageUrl="@{presenter.imageURL}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

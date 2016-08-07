@@ -17,7 +17,6 @@ public class AppBarTransparentScrollingViewBehavior extends AppBarLayout.Scrolli
         super();
     }
 
-
     @Override
     public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
         updateOffset(parent, child, dependency);

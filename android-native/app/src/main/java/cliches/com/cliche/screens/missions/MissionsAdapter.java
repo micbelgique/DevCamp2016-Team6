@@ -72,7 +72,7 @@ public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.Missio
 
         @Override
         public void onClick(View view) {
-            mPresenter.openMission(getAdapterPosition());
+            mPresenter.openMission(getAdapterPosition(), image);
         }
     }
 }

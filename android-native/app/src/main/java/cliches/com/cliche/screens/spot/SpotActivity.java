@@ -1,4 +1,4 @@
-package cliches.com.cliche.spot;
+package cliches.com.cliche.screens.spot;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;

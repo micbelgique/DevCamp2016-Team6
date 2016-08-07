@@ -1,4 +1,4 @@
-package cliches.com.cliche.missions;
+package cliches.com.cliche.screens.missions;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -16,9 +16,9 @@ import cliches.com.cliche.models.Mission;
 public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.MissionViewHolder> {
 
     Context mContext;
-    MissionsPresenter mPresenter;
+    MissionsListPresenter mPresenter;
 
-    public MissionsAdapter(Context context,MissionsPresenter presenter) {
+    public MissionsAdapter(Context context, MissionsListPresenter presenter) {
         mContext = context;
         mPresenter = presenter;
     }
@@ -54,13 +54,13 @@ public class MissionsAdapter extends RecyclerView.Adapter<MissionsAdapter.Missio
 
     static class MissionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final MissionsPresenter mPresenter;
+        private final MissionsListPresenter mPresenter;
 
         private final TextView name;
         private final TextView tagLine;
         private final ImageView image;
 
-        public MissionViewHolder(MissionsPresenter presenter, View itemView) {
+        public MissionViewHolder(MissionsListPresenter presenter, View itemView) {
             super(itemView);
             mPresenter = presenter;
             name = (TextView) itemView.findViewById(R.id.name);

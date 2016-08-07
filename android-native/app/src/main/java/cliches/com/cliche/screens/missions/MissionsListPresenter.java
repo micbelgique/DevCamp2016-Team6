@@ -1,4 +1,4 @@
-package cliches.com.cliche.missions;
+package cliches.com.cliche.screens.missions;
 
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class MissionsPresenter {
+public class MissionsListPresenter {
     private ViewActions mViewActions;
     private Subscription mMissionsSubscription;
     private List<Mission> mMissions;
@@ -35,7 +35,7 @@ public class MissionsPresenter {
         void open(Mission tappedMission);
     }
 
-    public MissionsPresenter(ViewActions viewActions) {
+    public MissionsListPresenter(ViewActions viewActions) {
         mViewActions = viewActions;
         mMissions = new ArrayList<>();
     }

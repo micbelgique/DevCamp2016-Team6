@@ -7,7 +7,7 @@
     <data>
         <variable
             name="presenter"
-            type="cliches.com.cliche.mission.MissionPresenter" />
+            type="cliches.com.cliche.screens.mission.MissionPresenter" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout

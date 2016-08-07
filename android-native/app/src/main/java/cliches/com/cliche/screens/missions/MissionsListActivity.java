@@ -1,4 +1,4 @@
-package cliches.com.cliche.missions;
+package cliches.com.cliche.screens.missions;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -6,22 +6,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
-import cliches.com.cliche.mission.MissionActivity;
 import cliches.com.cliche.R;
-import cliches.com.cliche.databinding.ActivityMainBinding;
+import cliches.com.cliche.databinding.ActivityMissionsListBinding;
 import cliches.com.cliche.models.Mission;
+import cliches.com.cliche.screens.mission.MissionActivity;
 
-public class MainActivity extends AppCompatActivity implements MissionsPresenter.ViewActions {
+public class MissionsListActivity extends AppCompatActivity implements MissionsListPresenter.ViewActions {
 
-    private ActivityMainBinding mViewBinding;
-    private MissionsPresenter mPresenter;
+    private ActivityMissionsListBinding mViewBinding;
+    private MissionsListPresenter mPresenter;
     private MissionsAdapter mMissionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mPresenter = new MissionsPresenter(this);
+        mViewBinding = DataBindingUtil.setContentView(this, R.layout.activity_missions_list);
+        mPresenter = new MissionsListPresenter(this);
         mMissionAdapter = new MissionsAdapter(this, mPresenter);
 
         setupToolbar();

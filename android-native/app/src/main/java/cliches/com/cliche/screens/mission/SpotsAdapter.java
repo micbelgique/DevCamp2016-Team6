@@ -1,4 +1,4 @@
-package cliches.com.cliche.mission;
+package cliches.com.cliche.screens.mission;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;

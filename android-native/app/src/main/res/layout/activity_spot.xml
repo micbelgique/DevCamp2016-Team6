@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="presenter" type="cliches.com.cliche.spot.SpotPresenter" />
+        <variable name="presenter" type="cliches.com.cliche.screens.spot.SpotPresenter" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout

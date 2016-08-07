@@ -1,21 +1,18 @@
-package cliches.com.cliche.mission;
+package cliches.com.cliche.screens.mission;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-
 import cliches.com.cliche.R;
 import cliches.com.cliche.databinding.ActivityMissionBinding;
 import cliches.com.cliche.models.Mission;
-import cliches.com.cliche.mission.MissionPresenter;
-import cliches.com.cliche.mission.SpotsAdapter;
+import cliches.com.cliche.screens.mission.MissionPresenter;
+import cliches.com.cliche.screens.mission.SpotsAdapter;
 import cliches.com.cliche.models.Spot;
-import cliches.com.cliche.spot.SpotActivity;
+import cliches.com.cliche.screens.spot.SpotActivity;
 import cliches.com.cliche.utils.GridSpacingDecorator;
 import cliches.com.cliche.utils.ResourcesHelper;
 import timber.log.Timber;

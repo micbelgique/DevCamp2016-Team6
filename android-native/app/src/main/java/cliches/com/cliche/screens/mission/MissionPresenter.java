@@ -1,13 +1,11 @@
-package cliches.com.cliche.mission;
+package cliches.com.cliche.screens.mission;
 
 
 import android.databinding.ObservableField;
-import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cliches.com.cliche.R;
 import cliches.com.cliche.models.Mission;
 import cliches.com.cliche.models.Spot;
 import cliches.com.cliche.utils.App;

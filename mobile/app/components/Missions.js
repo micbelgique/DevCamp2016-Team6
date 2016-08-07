@@ -38,7 +38,7 @@ class Missions extends Component {
     url = this.missionsUrl()
 
     new HttpService(url).get({
-      device_id: this.props.deviceId
+      deviceId: this.props.deviceId
     }, data => {
       console.log(data);
       this.setState({ missions: data });

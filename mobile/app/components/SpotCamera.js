@@ -59,7 +59,7 @@ class SpotCamera extends Component {
           xhr.setRequestHeader("Content-type", 'application/json');
 
           params = {
-            device_id: this.props.deviceId,
+            deviceId: this.props.deviceId,
             user_spot_link: {
               picture: picture.data
             }
@@ -76,7 +76,9 @@ class SpotCamera extends Component {
   removePicture() {
     spot = this.state.spot;
     spot.ownPicture = null;
-    new HttpService(this.pictureUploadUrl()).post({})
+    new HttpService(this.pictureUploadUrl()).post({
+      deviceId: this.props.deviceId
+    })
     this.setState({spot: spot});
   }
 

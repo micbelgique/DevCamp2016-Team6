@@ -76,7 +76,7 @@ class Mission extends Component {
     url = this.spotsUrl()
 
     new HttpService(url).get({
-      device_id: this.props.deviceId
+      deviceId: this.props.deviceId
     }, data => {
       console.log(data);
       this.setState({ spots: data });

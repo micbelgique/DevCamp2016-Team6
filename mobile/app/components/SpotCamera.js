@@ -14,6 +14,7 @@ import {
 import HttpService from '../services/HttpService';
 import styles      from '../styles/SpotCameraStyles';
 import Camera      from 'react-native-camera';
+import humps       from 'humps';
 
 class SpotCamera extends Component {
   constructor(props) {
@@ -58,12 +59,12 @@ class SpotCamera extends Component {
           xhr.open('POST', this.pictureUploadUrl(), true);
           xhr.setRequestHeader("Content-type", 'application/json');
 
-          params = {
+          params = humps.decamelizeKeys({
             deviceId: this.props.deviceId,
-            user_spot_link: {
+            userSpotLink: {
               picture: picture.data
             }
-          }
+          })
 
           xhr.send(JSON.stringify(params));
         });

@@ -37,6 +37,7 @@ public class MissionsListActivity extends AppCompatActivity implements MissionsL
 
     private void setupToolbar() {
         setSupportActionBar(mViewBinding.toolbar);
+        setTitle("");
     }
 
     // View Actions

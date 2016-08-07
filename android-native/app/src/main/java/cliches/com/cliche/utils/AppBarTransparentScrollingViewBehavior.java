@@ -8,7 +8,9 @@ import android.view.View;
 
 /**
  * From: http://stackoverflow.com/a/34314147/15361
+ * AppBarLayout.ScrollingViewBehavior
  */
+
 public class AppBarTransparentScrollingViewBehavior extends AppBarLayout.ScrollingViewBehavior {
 
     public AppBarTransparentScrollingViewBehavior(Context context, AttributeSet attributeSet) {

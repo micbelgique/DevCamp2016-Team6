@@ -16,14 +16,10 @@ class Api::UserSpotLinksController < Api::BaseController
         end
 
         @user_spot_link.picture = File.new(tmp_path)
-      else
-        @user_spot_link.remove_picture!
-      end
-
-      @user_spot_link.save!
-
-      if tmp_path
+        @user_spot_link.save!
         FileUtils.rm(tmp_path)
+      else
+        @user_spot_link.destroy!
       end
     end
 

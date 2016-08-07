@@ -76,6 +76,7 @@ class SpotCamera extends Component {
   removePicture() {
     spot = this.state.spot;
     spot.ownPicture = null;
+    new HttpService(this.pictureUploadUrl()).post()
     this.setState({spot: spot});
   }
 

@@ -24,7 +24,6 @@ Equipe: Creative Monkeys
 
 ### Sreenshots React Native Android
 
-![](screenshots/react-android-1.png)
 ![](screenshots/react-android-2.png)
 ![](screenshots/react-android-3.png)
 ![](screenshots/react-android-4.png)

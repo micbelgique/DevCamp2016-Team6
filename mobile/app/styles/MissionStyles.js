@@ -57,6 +57,7 @@ module.exports = StyleSheet.create({
     paddingRight: 8,
   },
   loading: {
+    color: '#888888',
     textAlign: 'center',
     marginTop: 60
   }

@@ -83,13 +83,20 @@ class Mission extends Component {
     });
   }
 
+  // removeOwnPicture(spot_id) {
+  //   this.spots.forEach((spot) => {
+  //     if(spot.id == spot_id)
+  //       spot.ownPicture = null
+  //   })
+  // }
+
   goToSpot(spot) {
     this.props.navigator.push({
-      controller: 'spots',
-      action:     'show',
-      mission:    this.props.mission,
-      spot:       spot,
-      onPop:      this.reloadSpots.bind(this)
+      controller:       'spots',
+      action:           'show',
+      mission:          this.props.mission,
+      spot:             spot,
+      onPop:            this.reloadSpots.bind(this)
     });
   }
 

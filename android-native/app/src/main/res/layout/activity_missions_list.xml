@@ -19,9 +19,13 @@
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+            <!--
+             android:theme="@style/AppTheme.TranslucentToolbar"
+
+            -->
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
@@ -29,11 +33,14 @@
         </android.support.design.widget.AppBarLayout>
 
         <!-- Actual Content -->
+        <!-- The -1dp marginBottom is to hide the separator of the last line_item_mission. -->
+        <!-- Beuark, use Item Decoration instead -->
         <android.support.v7.widget.RecyclerView
             tools:context=".screens.missions.MissionsListActivity"
             android:id="@+id/missionsList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="-1dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
     </android.support.design.widget.CoordinatorLayout>

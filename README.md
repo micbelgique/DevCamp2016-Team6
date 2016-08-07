@@ -1,6 +1,10 @@
 # Cliché
 
-Equipe: Creative Monkeys
+## But du projet
+
+Découvrir une région via une série de clichés à collectionner.
+
+## Equipe: Creative Monkeys
 
 + Aurélien Malisart
 + François Stephany

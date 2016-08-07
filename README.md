@@ -44,7 +44,7 @@ Stack:
 
 ### Screenshots
 
-![](screenshots/native-confirm-picture.png|width=320)
+![](screenshots/native-confirm-picture.png)
 ![](screenshots/native-mission-description.png | width=320)
 ![](screenshots/native-missions-list.png | width=320)
 ![](screenshots/native-mission-spots.png | width=320)

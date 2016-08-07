@@ -22,6 +22,13 @@ Equipe: Creative Monkeys
     $ react-native run-ios
     $ react-native run-android
 
+### Sreenshots React Native Android
+
+![](screenshots/react-android-1.png)
+![](screenshots/react-android-2.png)
+![](screenshots/react-android-3.png)
+![](screenshots/react-android-4.png)
+![](screenshots/react-android-5.png)
 
 ## Android native
 

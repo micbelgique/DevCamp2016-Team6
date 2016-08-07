@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-
         <!-- Actual Content -->
         <!-- The -1dp marginBottom is to hide the separator of the last line_item_mission. -->
         <!-- Beuark, use item decoration instead -->
@@ -22,8 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="-1dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
+            app:layout_behavior="cliches.com.cliche.utils.AppBarTransparentScrollingViewBehavior" />
 
         <!-- Toolbar -->
         <android.support.design.widget.AppBarLayout
@@ -44,6 +42,5 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|snap|enterAlways"/>
         </android.support.design.widget.AppBarLayout>
-
     </android.support.design.widget.CoordinatorLayout>
 </layout>

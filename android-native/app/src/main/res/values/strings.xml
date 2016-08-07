@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Cliché</string>
+    <string name="app_name">Clichés</string>
     <string name="title_activity_spot">SpotActivity</string>
     <string name="photo_upload_error">Error while uploading picture</string>
     <string name="dialog_ok">ok</string>
     <string name="takePictureAction">Prendre la photo</string>
     <string name="dialog_picture_upload">Uploading your picture!</string>
+    <string name="show_on_map">Show on map</string>
 </resources>

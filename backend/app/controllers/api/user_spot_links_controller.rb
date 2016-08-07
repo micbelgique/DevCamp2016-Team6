@@ -19,7 +19,7 @@ class Api::UserSpotLinksController < Api::BaseController
         @user_spot_link.save!
         FileUtils.rm(tmp_path)
       else
-        @user_spot_link.destroy!
+        @user_spot_link.destroy! if @user_spot_link.persisted?
       end
     end
 
